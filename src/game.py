@@ -1,7 +1,7 @@
 
 import levels
 import utils
-
+import states
 
 class Game:
     def __init__(self, board):
@@ -26,7 +26,7 @@ class Game:
         print("]")
 
 
-p1 = Game(levels.test)
+p1 = Game(levels.test2)
 
 """
 
