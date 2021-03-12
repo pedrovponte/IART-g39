@@ -22,27 +22,27 @@ def precond(board, op):
             # means it is movable piece
             if board[row][col][0]=="I":
                 if op=="up":
-                    if row!=0 and board[row-1][col]!="X":
+                    if row!=0 and board[row-1][col]!="X" and board[row-1][col][0]!="I":
                         return True
             if board[row][col][0]=="I":
                 if op=="down":
-                    if row!=len(board)-1 and board[row+1][col]!="X":
+                    if row!=len(board)-1 and board[row+1][col]!="X" and board[row+1][col][0]!="I":
                         return True
             if board[row][col][0]=="I":
                 if op=="left":
-                    if col!=0 and board[row][col-1]!="X":
+                    if col!=0 and board[row][col-1]!="X" and board[row][col-1][0]!="I":
                         return True
             if board[row][col][0]=="I":
                 if op=="right":
-                    if col!=len(board)-1 and board[row][col+1]!="X":
+                    if col!=len(board)-1 and board[row][col+1]!="X" and board[row][col+1][0]!="I":
                         return True
     return False
 
 print(precond([
 		['X','-','-','-'],
-		['I','-','-','-'],
+		['-','I','-','I'],
 		['X','F','-','-'],
-		['X','F','-','I']
+		['X','F','-','-']
 		], "right"))
 
 #def effects(board,op):
