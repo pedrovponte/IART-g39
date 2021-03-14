@@ -45,4 +45,88 @@ print(precond([
 		['X','F','-','-']
 		], "right"))
 
-#def effects(board,op):
+def effects(board,op):
+    if(op=="up"):
+        for row in range(len(board)-1,0,-1):
+            for col in range(len(board)):
+                if board[row][col][0]=="I":
+                    # Top is not F
+                    if board[row-1][col]=="-":
+                        if len(board[row][col])>2:
+                            board[row-1][col]=board[row][col][:2]
+                            board[row][col]=board[row][col][2:]
+                        else:
+                            board[row-1][col]=board[row][col]
+                            board[row][col]="-"
+                    if board[row-1][col][0]=="F":
+                        if len(board[row][col])>2:
+                            board[row-1][col]=board[row][col][:2]+board[row-1][col]
+                            board[row][col]=board[row][col][2:]
+                        else:
+                            board[row-1][col]=board[row][col]+board[row-1][col]
+                            board[row][col]="-"
+    if(op=="down"):
+        for row in range(len(board)-1):
+            for col in range(len(board)):
+                if board[row][col][0]=="I":
+                    # Top is not F
+                    if board[row+1][col]=="-":
+                        if len(board[row][col])>2:
+                            board[row+1][col]=board[row][col][:2]
+                            board[row][col]=board[row][col][2:]
+                        else:
+                            board[row+1][col]=board[row][col]
+                            board[row][col]="-"
+                    if board[row+1][col][0]=="F":
+                        if len(board[row][col])>2:
+                            board[row+1][col]=board[row][col][:2]+board[row+1][col]
+                            board[row][col]=board[row][col][2:]
+                        else:
+                            board[row+1][col]=board[row][col]+board[row+1][col]
+                            board[row][col]="-"
+    if(op=="right"):
+        for col in range(len(board)-1):
+            for row in range(len(board)):
+                if board[row][col][0]=="I":
+                    # Top is not F
+                    if board[row][col+1]=="-":
+                        if len(board[row][col])>2:
+                            board[row][col+1]=board[row][col][:2]
+                            board[row][col]=board[row][col][2:]
+                        else:
+                            board[row][col+1]=board[row][col]
+                            board[row][col]="-"
+                    if board[row][col+1][0]=="F":
+                        if len(board[row][col])>2:
+                            board[row][col+1]=board[row][col][:2]+board[row][col+1]
+                            board[row][col]=board[row][col][2:]
+                        else:
+                            board[row][col+1]=board[row][col]+board[row][col+1]
+                            board[row][col]="-"
+    if(op=="left"):
+        for col in range(len(board)-1,0,-1):
+            for row in range(len(board)):
+                if board[row][col][0]=="I":
+                    # Top is not F
+                    if board[row][col-1]=="-":
+                        if len(board[row][col])>2:
+                            board[row][col-1]=board[row][col][:2]
+                            board[row][col]=board[row][col][2:]
+                        else:
+                            board[row][col-1]=board[row][col]
+                            board[row][col]="-"
+                    if board[row][col-1][0]=="F":
+                        if len(board[row][col])>2:
+                            board[row][col-1]=board[row][col][:2]+board[row][col-1]
+                            board[row][col]=board[row][col][2:]
+                        else:
+                            board[row][col-1]=board[row][col]+board[row][col-1]
+                            board[row][col]="-"
+    return board
+
+print(effects([
+		['X','F1','-','I4'],
+		['-','I1','F2','-'],
+		['X','F2','F3','I2'],
+		['X','-','I3','-']
+		], "left"))
