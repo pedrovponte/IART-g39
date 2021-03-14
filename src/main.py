@@ -1,7 +1,7 @@
 import pygame
 from constants import WIDTH, HEIGHT
 from board import *
-from levels import test2
+from levels import *
 from utils import *
 
 FPS = 60
@@ -13,12 +13,17 @@ pygame.display.set_caption('Match the Tiles - Sliding Puzzle Game')
 def main(level):
     run = True
     clock = pygame.time.Clock()
+    
+    width, height = 840, 640
+    square_width, square_height = 500, 500
+    rows, cols = len(level), len(level)
+    square_size = square_width // cols
 
-    RESET_SURF, RESET_RECT = makeText('Reset', TEXTCOLOR, WIDTH - 120, HEIGHT - 300)
-    NEW_SURF, NEW_RECT = makeText('New Game', TEXTCOLOR, WIDTH - 120, HEIGHT - 260)
-    SOLVE_SURF, SOLVE_RECT = makeText('Solve', TEXTCOLOR, WIDTH - 120, HEIGHT - 220)
+    RESET_SURF, RESET_RECT = makeText('Reset', TEXTCOLOR, width - 120, height - 300)
+    NEW_SURF, NEW_RECT = makeText('New Game', TEXTCOLOR, width - 120, height - 260)
+    SOLVE_SURF, SOLVE_RECT = makeText('Solve', TEXTCOLOR, width - 120, height - 220)
 
-    board = Board(level)
+    board = Board(level, square_size)
     
     while run:
         clock.tick(FPS)
@@ -39,4 +44,4 @@ def main(level):
     pygame.quit()
 
 
-p1 = main(test2)
+p1 = main(test3)

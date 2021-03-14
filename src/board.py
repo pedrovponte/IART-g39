@@ -1,18 +1,64 @@
 import pygame
 from constants import *
+from piece import *
 
 class Board:
-    def __init__(self, board):
+    def __init__(self, input_board, square_size):
         # self.algorithm = utils.chooseAlg()
-        self.board = board
+        self.square_size = square_size
+        self.board = [] 
+        self.input_board = input_board
+        self.create_board(input_board)
+        print(self.board)
 
     def draw(self, window):
         window.fill(BLUE)
         
-        for row in range(ROWS):
-            for col in range(COLS):
-                pygame.draw.rect(window, WHITE, (row*SQUARE_SIZE + 140,col*SQUARE_SIZE + 60,SQUARE_SIZE,SQUARE_SIZE), 0)
-                pygame.draw.rect(window, BLACK, (row*SQUARE_SIZE + 140,col*SQUARE_SIZE + 60,SQUARE_SIZE,SQUARE_SIZE), 1)
+        for row in range(len(self.input_board)):
+            for col in range(len(self.input_board)):
+                pygame.draw.rect(window, WHITE, (row*self.square_size + 140, col*self.square_size + 60, self.square_size, self.square_size), 0)
+                pygame.draw.rect(window, BLACK, (row*self.square_size + 140, col*self.square_size + 60, self.square_size, self.square_size), 1)
+        
+        for row in range(len(self.input_board)):
+            for col in range(len(self.input_board)):
+                piece = self.board[row][col]
+                if(piece != 0):
+                    piece.draw_piece(window)
+    
+    def create_board(self, input_board):
+        print(len(input_board))
+        for row in range(len(input_board)):
+            self.board.append([])
+            for col in range(len(input_board)):
+                if(input_board[row][col] == 'X'):
+                    self.board[row].append(Piece(row, col, WALL_TILE, self.square_size))
+                elif(input_board[row][col] == 'B'):
+                    self.board[row].append(Piece(row, col, BLUE_TILE, self.square_size))
+                elif(input_board[row][col] == 'G'):
+                    self.board[row].append(Piece(row, col, GREEN_TILE, self.square_size))
+                elif(input_board[row][col] == 'O'):
+                    self.board[row].append(Piece(row, col, ORANGE_TILE, self.square_size))
+                elif(input_board[row][col] == 'P'):
+                    self.board[row].append(Piece(row, col, PURPLE_TILE, self.square_size))
+                elif(input_board[row][col] == 'R'):
+                    self.board[row].append(Piece(row, col, RED_TILE, self.square_size))
+                elif(input_board[row][col] == 'Y'):
+                    self.board[row].append(Piece(row, col, YELLOW_TILE, self.square_size))
+                elif(input_board[row][col] == 'BF'):
+                    self.board[row].append(Piece(row, col, BLUE_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'GF'):
+                    self.board[row].append(Piece(row, col, GREEN_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'OF'):
+                    self.board[row].append(Piece(row, col, ORANGE_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'PF'):
+                    self.board[row].append(Piece(row, col, PURPLE_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'RF'):
+                    self.board[row].append(Piece(row, col, RED_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'YF'):
+                    self.board[row].append(Piece(row, col, YELLOW_FINAL_TILE, self.square_size))
+                else:
+                    self.board[row].append(0)
+                     
 
     
 
