@@ -1,32 +1,21 @@
+import pygame
+from constants import *
 
-import levels
-import utils
-import states
-
-class Game:
+class Board:
     def __init__(self, board):
-
-        self.algorithm = utils.chooseAlg()
+        # self.algorithm = utils.chooseAlg()
         self.board = board
-        self.moves = 0
-        self.printBoard()
 
-    def printBoard(self):
-        print()
-        print("Moves: ", self.moves)
-        for row in self.board:
-            self.printRow(row)
-    def printRow(self, row):
-        print("[", end='')
-        for cell in row:
-            if cell == "0":
-                print(" " + cell + "  ",end='')
-            else:
-                print(cell + "  ",end='')
-        print("]")
+    def draw(self, window):
+        window.fill(BLUE)
+        
+        for row in range(ROWS):
+            for col in range(COLS):
+                pygame.draw.rect(window, WHITE, (row*SQUARE_SIZE + 140,col*SQUARE_SIZE + 60,SQUARE_SIZE,SQUARE_SIZE), 0)
+                pygame.draw.rect(window, BLACK, (row*SQUARE_SIZE + 140,col*SQUARE_SIZE + 60,SQUARE_SIZE,SQUARE_SIZE), 1)
 
+    
 
-p1 = Game(levels.test2)
 
 """
 

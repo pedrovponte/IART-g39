@@ -1,8 +1,10 @@
-  
+import pygame  
+
+
 def chooseAlg():
 
     print("Please, choose which search method do you wish to use:")
-    print ("1) Human Interaction.")
+    print("1) Human Interaction.")
     print("A) Breadth-first search.")
     print("B) Depth-first search.")
     print("C) Progressive deepening.")
@@ -28,3 +30,13 @@ def chooseAlg():
         return '1'
     else:
         chooseAlg()
+
+# create the Surface and Rect objects for some text.        
+def makeText(text, color, top, left):
+    pygame.font.init()
+    BASICFONT = pygame.font.Font('freesansbold.ttf', 20)
+    
+    textSurf = BASICFONT.render(text, True, color)
+    textRect = textSurf.get_rect()
+    textRect.topleft = (top, left)
+    return (textSurf, textRect)
