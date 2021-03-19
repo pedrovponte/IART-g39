@@ -32,17 +32,17 @@ class Board:
             for col in range(len(input_board)):
                 if(input_board[row][col] == 'X'):
                     self.board[row].append(Piece(row, col, WALL_TILE, self.square_size))
-                elif(input_board[row][col] == 'B'):
+                elif(input_board[row][col] == 'IB'):
                     self.board[row].append(Piece(row, col, BLUE_TILE, self.square_size))
-                elif(input_board[row][col] == 'G'):
+                elif(input_board[row][col] == 'IG'):
                     self.board[row].append(Piece(row, col, GREEN_TILE, self.square_size))
-                elif(input_board[row][col] == 'O'):
+                elif(input_board[row][col] == 'IO'):
                     self.board[row].append(Piece(row, col, ORANGE_TILE, self.square_size))
-                elif(input_board[row][col] == 'P'):
+                elif(input_board[row][col] == 'IP'):
                     self.board[row].append(Piece(row, col, PURPLE_TILE, self.square_size))
-                elif(input_board[row][col] == 'R'):
+                elif(input_board[row][col] == 'IR'):
                     self.board[row].append(Piece(row, col, RED_TILE, self.square_size))
-                elif(input_board[row][col] == 'Y'):
+                elif(input_board[row][col] == 'IY'):
                     self.board[row].append(Piece(row, col, YELLOW_TILE, self.square_size))
                 elif(input_board[row][col] == 'BF'):
                     self.board[row].append(Piece(row, col, BLUE_FINAL_TILE, self.square_size))
