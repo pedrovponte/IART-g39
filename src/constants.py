@@ -1,6 +1,29 @@
 import pygame
+import os
 
 # images
+
+
+
+"""
+WALL_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/wall.png')
+WHITE_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/white_tile.png')
+BLUE_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/blue_tile.png')
+BLUE_FINAL_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/blue_final_tile.png')
+GREEN_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/green_tile.png')
+GREEN_FINAL_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/green_final_tile.png')
+ORANGE_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/orange_tile.png')
+ORANGE_FINAL_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/orange_final_tile.png')
+PURPLE_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/purple_tile.png')
+PURPLE_FINAL_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/purple_final_tile.png')
+RED_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/red_tile.png') 
+RED_FINAL_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/red_final_tile.png')
+YELLOW_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/yellow_tile.png')
+YELLOW_FINAL_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/yellow_final_tile.png')
+
+"""
+
+
 WALL_TILE = pygame.image.load('Tiles/wall.png')
 WHITE_TILE = pygame.image.load('Tiles/white_tile.png')
 BLUE_TILE = pygame.image.load('Tiles/blue_tile.png')
@@ -15,7 +38,6 @@ RED_TILE = pygame.image.load('Tiles/red_tile.png')
 RED_FINAL_TILE = pygame.image.load('Tiles/red_final_tile.png')
 YELLOW_TILE = pygame.image.load('Tiles/yellow_tile.png')
 YELLOW_FINAL_TILE = pygame.image.load('Tiles/yellow_final_tile.png')
-
 
 #rgb
 WHITE = (255, 255, 255)
