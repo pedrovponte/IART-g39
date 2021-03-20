@@ -44,20 +44,23 @@ class Board:
                     self.board[row].append(Piece(row, col, RED_TILE, self.square_size))
                 elif(input_board[row][col] == 'IY'):
                     self.board[row].append(Piece(row, col, YELLOW_TILE, self.square_size))
-                elif(input_board[row][col] == 'BF'):
-                    self.board[row].append(Piece(row, col, BLUE_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'GF'):
-                    self.board[row].append(Piece(row, col, GREEN_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'OF'):
-                    self.board[row].append(Piece(row, col, ORANGE_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'PF'):
-                    self.board[row].append(Piece(row, col, PURPLE_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'RF'):
-                    self.board[row].append(Piece(row, col, RED_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'YF'):
-                    self.board[row].append(Piece(row, col, YELLOW_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'FB'):
+                	self.board[row].append(Piece(row, col, BLUE_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'FG'):
+                	self.board[row].append(Piece(row, col, GREEN_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'FO'):
+                	self.board[row].append(Piece(row, col, ORANGE_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'FP'):
+                	self.board[row].append(Piece(row, col, PURPLE_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'FR'):
+                	self.board[row].append(Piece(row, col, RED_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == 'FY'):
+                	self.board[row].append(Piece(row, col, YELLOW_FINAL_TILE, self.square_size))
+                elif(input_board[row][col] == '-'):
+                	self.board[row].append(0)
                 else:
-                    self.board[row].append(0)
+                	self.board[row].append(Piece(row, col, WHITE_TILE, self.square_size))
+
                      
 
     
