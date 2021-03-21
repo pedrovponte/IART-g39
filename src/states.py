@@ -1,4 +1,5 @@
 import time
+from pythonds.basic.stack import Stack
 
 class Node:
     def __init__(self, state, parent, operator, depth, cost):
@@ -208,29 +209,56 @@ def bfs(start):
 
     return path
 
-# =============================================================================
-# print(bfs([
-# 		['X','-','-','IY'],
-# 		['IB','-','-','-'],
-# 		['X','FB','-','-'],
-# 		['X','FY','-','-']
-# 		]))
-# 
-# test2 = [
-# 		['-','-','-','FR'],
-# 		['IR','-','X','-'],
-# 		['X','IG','-','-'],
-# 		['-','-','-','FG']
-# 		]
-# print(bfs(test2))
-# 
-# test3 = [
-# 		['-','-','-','-','FB'],
-# 		['-','-','IB','-','X'],
-# 		['-','-','-','X','-'],
-# 		['-','IB','X','-','FB'],
-#         ['X', '-', '-', '-','-']
-# 		]
-# 
-# print(bfs(test3))
-# =============================================================================
+def dfs(start, depth=10):
+    print("DFS start")
+    start_node=Node(start, None, None, 0, 0)
+    fringe_stack=Stack()
+    fringe_stack.push(start_node)
+    current=fringe_stack.pop()
+    path=[]
+
+    while(objectiveTest(current.state)!=True):
+        temp=expand_node(current)
+        for item in temp:
+            fringe_stack.push(item)
+        current=fringe_stack.pop()
+        if(current.depth>depth):
+            return None
+
+    while(current.parent!=None):
+        path.insert(0,current.operator)
+        current=current.parent
+
+    return path
+
+print(bfs([
+		['X','-','-','IY'],
+		['IB','-','-','-'],
+		['X','FB','-','-'],
+		['X','FY','-','-']
+		]))
+
+print(dfs([
+		['X','-','-','IY'],
+		['IB','-','-','-'],
+		['X','FB','-','-'],
+		['X','FY','-','-']
+		]))
+
+test2 = [
+		['-','-','-','FR'],
+		['IR','-','X','-'],
+		['X','IG','-','-'],
+		['-','-','-','FG']
+		]
+print(bfs(test2))
+
+test3 = [
+		['-','-','-','-','FB'],
+		['-','-','IB','-','X'],
+		['-','-','-','X','-'],
+		['-','IB','X','-','FB'],
+        ['X', '-', '-', '-','-']
+		]
+
+print(bfs(test3))
