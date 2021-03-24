@@ -209,19 +209,30 @@ def bfs(start):
 
     return path
 
-def dfs(start, depth=10):
+def dfs(start, depth=100):
+    seen = []
+
+    startTime = time.time()
     print("DFS start")
+
     start_node=Node(start, None, None, 0, 0)
-    fringe_stack=Stack()
-    fringe_stack.push(start_node)
-    current=fringe_stack.pop()
+    dfs_stack=[]
+    dfs_stack.append(start_node)
+    current=dfs_stack.pop()
     path=[]
+    seen.append(current.state)
 
     while(objectiveTest(current.state)!=True):
         temp=expand_node(current)
+        #for i in temp:
+        #    print(i.state)
         for item in temp:
-            fringe_stack.push(item)
-        current=fringe_stack.pop()
+            if (item.state not in seen and item.state not in dfs_stack):
+                dfs_stack.append(item)
+            else:
+                continue
+        current=dfs_stack.pop()
+        seen.append(current.state)
         if(current.depth>depth):
             return None
 
@@ -229,40 +240,51 @@ def dfs(start, depth=10):
         path.insert(0,current.operator)
         current=current.parent
 
+    endTime = time.time()
+
+    timeElapsed = endTime - startTime
+
+    if timeElapsed>1:
+        print("Time: " + str(round(timeElapsed,3)) + "s")
+    else:
+        print("Time: " + str(round(timeElapsed*1000,3)) + "ms")
+
     return path
 
 # =============================================================================
-# print(bfs([
-# 		['X','-','-','IY'],
-# 		['IB','-','-','-'],
-# 		['X','FB','-','-'],
-# 		['X','FY','-','-']
-# 		]))
-# 
-# print(dfs([
-# 		['X','-','-','IY'],
-# 		['IB','-','-','-'],
-# 		['X','FB','-','-'],
-# 		['X','FY','-','-']
-# 		]))
-# 
-# test2 = [
-# 		['-','-','-','FR'],
-# 		['IR','-','X','-'],
-# 		['X','IG','-','-'],
-# 		['-','-','-','FG']
-# 		]
-# print(bfs(test2))
-# 
-# test3 = [
-# 		['-','-','-','-','FB'],
-# 		['-','-','IB','-','X'],
-# 		['-','-','-','X','-'],
-# 		['-','IB','X','-','FB'],
-#         ['X', '-', '-', '-','-']
-# 		]
-# 
-# print(bfs(test3))
+print(bfs([
+		['X','-','-','IY'],
+		['IB','-','-','-'],
+		['X','FB','-','-'],
+		['X','FY','-','-']
+		]))
+
+print(dfs([
+		['X','-','-','IY'],
+		['IB','-','-','-'],
+		['X','FB','-','-'],
+		['X','FY','-','-']
+		]))
+
+test2 = [
+		['-','-','-','FR'],
+		['IR','-','X','-'],
+		['X','IG','-','-'],
+		['-','-','-','FG']
+		]
+print(bfs(test2))
+print(dfs(test2))
+
+test3 = [
+		['-','-','-','-','FB'],
+		['-','-','IB','-','X'],
+		['-','-','-','X','-'],
+		['-','IB','X','-','FB'],
+        ['X', '-', '-', '-','-']
+		]
+
+print(bfs(test3))
+print(dfs(test3))
 # =============================================================================
 
 def uniform_cost(start,):

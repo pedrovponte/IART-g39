@@ -1,5 +1,5 @@
 import pygame
-import os
+from utils import *
 
 """
 # images
@@ -106,7 +106,6 @@ IYFG_TILE = pygame.image.load('Tiles/yellow_greenc_tile.png')
 IYFO_TILE = pygame.image.load('Tiles/yellow_orangec_tile.png')
 IYFP_TILE = pygame.image.load('Tiles/yellow_purplec_tile.png')
 IYFR_TILE = pygame.image.load('Tiles/yellow_redc_tile.png')
-LOADING = pygame.image.load('Tiles/loading.png')
 
 
 
@@ -176,4 +175,14 @@ SQUARE_WIDTH, SQUARE_HEIGHT = 500, 500
 ROWS, COLS = 4, 4
 SQUARE_SIZE = SQUARE_WIDTH//COLS
 
+# Text
 TEXTCOLOR = BLACK
+
+GAMENAME_SURF, GAMENAME_RECT = makeText('Match the Tiles', TEXTCOLOR, 215, 100, 55)
+PLAYER_SURF, PLAYER_RECT = makeText('Player Mode', TEXTCOLOR, 350, 270, 25)
+COMPUTER_SURF, COMPUTER_RECT = makeText('Computer Mode', TEXTCOLOR, 328, 320, 25)
+
+RESET_SURF, RESET_RECT = makeText('Reset', TEXTCOLOR, 720, 300, 20)
+QUIT_SURF, QUIT_RECT = makeText('Quit', TEXTCOLOR, 720, 325, 20)
+
+LEVEL1_SURF, LEVEL1_RECT = makeText('Level 1', TEXTCOLOR, 200, 150, 25)

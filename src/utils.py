@@ -32,9 +32,9 @@ def chooseAlg():
         chooseAlg()
 
 # create the Surface and Rect objects for some text.        
-def makeText(text, color, top, left):
+def makeText(text, color, top, left, size):
     pygame.font.init()
-    BASICFONT = pygame.font.Font('freesansbold.ttf', 20)
+    BASICFONT = pygame.font.Font('freesansbold.ttf', size)
     
     textSurf = BASICFONT.render(text, True, color)
     textRect = textSurf.get_rect()
