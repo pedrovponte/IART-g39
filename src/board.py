@@ -30,36 +30,40 @@ class Board:
         for row in range(len(input_board)):
             self.board.append([])
             for col in range(len(input_board)):
-                if(input_board[row][col] == 'X'):
-                    self.board[row].append(Piece(row, col, WALL_TILE, self.square_size))
-                elif(input_board[row][col] == 'IB'):
-                    self.board[row].append(Piece(row, col, BLUE_TILE, self.square_size))
-                elif(input_board[row][col] == 'IG'):
-                    self.board[row].append(Piece(row, col, GREEN_TILE, self.square_size))
-                elif(input_board[row][col] == 'IO'):
-                    self.board[row].append(Piece(row, col, ORANGE_TILE, self.square_size))
-                elif(input_board[row][col] == 'IP'):
-                    self.board[row].append(Piece(row, col, PURPLE_TILE, self.square_size))
-                elif(input_board[row][col] == 'IR'):
-                    self.board[row].append(Piece(row, col, RED_TILE, self.square_size))
-                elif(input_board[row][col] == 'IY'):
-                    self.board[row].append(Piece(row, col, YELLOW_TILE, self.square_size))
-                elif(input_board[row][col] == 'FB'):
-                	self.board[row].append(Piece(row, col, BLUE_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'FG'):
-                	self.board[row].append(Piece(row, col, GREEN_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'FO'):
-                	self.board[row].append(Piece(row, col, ORANGE_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'FP'):
-                	self.board[row].append(Piece(row, col, PURPLE_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'FR'):
-                	self.board[row].append(Piece(row, col, RED_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == 'FY'):
-                	self.board[row].append(Piece(row, col, YELLOW_FINAL_TILE, self.square_size))
-                elif(input_board[row][col] == '-'):
+                if(input_board[row][col] == '-'):
                 	self.board[row].append(0)
                 else:
-                	self.board[row].append(Piece(row, col, WHITE_TILE, self.square_size))
+                    self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+                    
+                
+# =============================================================================
+#                 elif(input_board[row][col] == 'IB'):
+#                     self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'IG'):
+#                     self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'IO'):
+#                     self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'IP'):
+#                     self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'IR'):
+#                     self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'IY'):
+#                     self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'FB'):
+#                 	self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'FG'):
+#                 	self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'FO'):
+#                 	self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'FP'):
+#                 	self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'FR'):
+#                 	self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+#                 elif(input_board[row][col] == 'FY'):
+#                 	self.board[row].append(Piece(row, col, colors[input_board[row][col]], self.square_size))
+# =============================================================================
+                
+                
 
                      
 

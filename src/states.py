@@ -158,21 +158,21 @@ def effects(oldboard,op):
                                 board[row][col-1]=board[row][col]+board[row][col-1]
                                 board[row][col]="-"
         return board
-"""
+
 node1 = [['X','-','-','-'],
 		['IB','-','I2','IY'],
 		['X','FB','-','IJ'],
 		['X','FY','-','-']
 		]
-print(effects(node1,"left"))"""
+print(effects(node1,"left"))
 
 def expand_node(node):
     """Returns a list of expanded nodes"""
     expanded_nodes = []
-    expanded_nodes.append(Node(effects(node.state,"up"), node, "up", node.depth + 1, 0))
-    expanded_nodes.append(Node(effects(node.state,"down"), node, "down", node.depth + 1, 0))
-    expanded_nodes.append(Node(effects(node.state,"left"), node, "left", node.depth + 1, 0))
-    expanded_nodes.append(Node(effects(node.state,"right"), node, "right", node.depth + 1, 0))
+    expanded_nodes.append(Node(effects(node.state,"up"), node, "up", node.depth + 1, 1))
+    expanded_nodes.append(Node(effects(node.state,"down"), node, "down", node.depth + 1, 1))
+    expanded_nodes.append(Node(effects(node.state,"left"), node, "left", node.depth + 1, 1))
+    expanded_nodes.append(Node(effects(node.state,"right"), node, "right", node.depth + 1, 1))
     # Filter the list and remove the nodes that are impossible (move function returned None)
     expanded_nodes = [node for node in expanded_nodes if node.state != None]  # list comprehension!
     return expanded_nodes
@@ -231,34 +231,126 @@ def dfs(start, depth=10):
 
     return path
 
-print(bfs([
-		['X','-','-','IY'],
-		['IB','-','-','-'],
-		['X','FB','-','-'],
-		['X','FY','-','-']
-		]))
+# =============================================================================
+# print(bfs([
+# 		['X','-','-','IY'],
+# 		['IB','-','-','-'],
+# 		['X','FB','-','-'],
+# 		['X','FY','-','-']
+# 		]))
+# 
+# print(dfs([
+# 		['X','-','-','IY'],
+# 		['IB','-','-','-'],
+# 		['X','FB','-','-'],
+# 		['X','FY','-','-']
+# 		]))
+# 
+# test2 = [
+# 		['-','-','-','FR'],
+# 		['IR','-','X','-'],
+# 		['X','IG','-','-'],
+# 		['-','-','-','FG']
+# 		]
+# print(bfs(test2))
+# 
+# test3 = [
+# 		['-','-','-','-','FB'],
+# 		['-','-','IB','-','X'],
+# 		['-','-','-','X','-'],
+# 		['-','IB','X','-','FB'],
+#         ['X', '-', '-', '-','-']
+# 		]
+# 
+# print(bfs(test3))
+# =============================================================================
 
-print(dfs([
-		['X','-','-','IY'],
-		['IB','-','-','-'],
-		['X','FB','-','-'],
-		['X','FY','-','-']
-		]))
+def uniform_cost(start,):
+    print("Uniform cost start")
 
-test2 = [
-		['-','-','-','FR'],
-		['IR','-','X','-'],
-		['X','IG','-','-'],
-		['-','-','-','FG']
-		]
-print(bfs(test2))
+    startTime = time.time()
 
-test3 = [
-		['-','-','-','-','FB'],
-		['-','-','IB','-','X'],
-		['-','-','-','X','-'],
-		['-','IB','X','-','FB'],
-        ['X', '-', '-', '-','-']
-		]
+    start_node=Node(start, None, None, 0, 0)
+    fringe=[]
+    path=[]
+    fringe.append(start_node)
+    current=fringe.pop(0)
+    while(objectiveTest(current.state)!=True):
+        temp=expand_node(current)
+        for item in temp:
+            item.depth+=current.depth
+            fringe.append(item)
+        fringe.sort(key =lambda x: x.depth)
+        current=fringe.pop(0)
+    while(current.parent!=None):
+        path.insert(0,current.operator)
+        current=current.parent
 
-print(bfs(test3))
+
+    endTime = time.time()
+
+    timeElapsed = endTime - startTime
+
+    if timeElapsed>1:
+        print("Time: " + str(round(timeElapsed,3)) + "s")
+    else:
+        print("Time: " + str(round(timeElapsed*1000,3)) + "ms")
+
+
+    return path
+
+print(uniform_cost([
+    ['X','-','-','IY'],
+    ['IB','-','-','-'],
+    ['X','FB','-','-'],
+    ['X','FY','-','-']
+    ]))
+
+
+
+
+def h(state):
+    dmatch=0
+    for i in range(0,9):
+        if (objectiveTest(state.state)!=True):
+            dmatch+=1
+    state.heuristic=dmatch
+
+def greedy(start):
+    print("Greedy start")
+
+    startTime = time.time()
+
+
+    start_node=Node(start, None, None, 0, 0)
+    fringe=[]
+    path=[]
+    fringe.append(start_node)
+    current=fringe.pop(0)
+    while(objectiveTest(current.state)!=True):
+        fringe.extend(expand_node(current))
+        for item in fringe:
+            h(item)
+        fringe.sort(key =lambda x: x.heuristic)
+        current=fringe.pop(0)
+    while(current.parent!=None):
+        path.insert(0,current.operator)
+        current=current.parent
+
+    endTime = time.time()
+
+    timeElapsed = endTime - startTime
+
+    if timeElapsed>1:
+        print("Time: " + str(round(timeElapsed,3)) + "s")
+    else:
+        print("Time: " + str(round(timeElapsed*1000,3)) + "ms")
+
+    return path
+
+print(greedy([
+    ['X','-','-','IY'],
+    ['IB','-','-','-'],
+    ['X','FB','-','-'],
+    ['X','FY','-','-']
+    ]))
