@@ -3,7 +3,7 @@ import time
 from pythonds.basic.stack import Stack
 from levels import *
 
-def dfs(start, depth=100):
+def dfs(start, depth=14):
     seen = []
 
     startTime = time.time()
@@ -27,8 +27,10 @@ def dfs(start, depth=100):
                 continue
         current=dfs_stack.pop()
         seen.append(current.state)
-        if(current.depth>depth):
-            return None
+        while (current.depth>depth):
+            if len(dfs_stack)==0:
+                return None
+            current=dfs_stack.pop()
 
     while(current.parent!=None):
         path.insert(0,current.operator)
