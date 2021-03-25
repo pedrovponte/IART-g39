@@ -4,6 +4,10 @@ from board import *
 from levels import *
 from utils import *
 from states import *
+from bfs import *
+from dfs import *
+from uniform_cost import *
+from greedy import *
 import msvcrt as m
 
 FPS = 60
@@ -12,23 +16,16 @@ WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Match the Tiles - Sliding Puzzle Game')
 
 
-def main(level, mode):
-    initial_level = level
+def main():
     run = True
     display_menu = True
     display_level = True
     display_alg = True
+    display_mode = True
     clock = pygame.time.Clock()
     
     width, height = 840, 640
     square_width, square_height = 500, 500
-    rows, cols = len(level), len(level)
-    square_size = square_width // cols
-    
-    
-    board = Board(level, square_size)
-    allMoves = []
-    path = None
     
     
     while display_menu:
@@ -40,16 +37,131 @@ def main(level, mode):
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP:
                 if PLAYER_RECT.collidepoint(event.pos):
-                    #mode = 'Player'
+                    mode = 'player'
                     display_menu = False
+                    display_mode = False
                     break
                 elif COMPUTER_RECT.collidepoint(event.pos):
-                    # mode = 'Computer'
                     display_menu = False
                     break
                 
         if(display_menu != False):
             pygame.display.update()
+            
+    
+    while display_mode:
+        WINDOW.fill(BLUE)
+        WINDOW.blit(CHOOSEMODE_SURF, CHOOSEMODE_RECT)
+        WINDOW.blit(BFS_SURF, BFS_RECT)
+        WINDOW.blit(DFS_SURF, DFS_RECT)
+        WINDOW.blit(UNIFORM_SURF, UNIFORM_RECT)
+        WINDOW.blit(GREEDY_SURF, GREEDY_RECT)
+        WINDOW.blit(ASTAR_SURF, ASTAR_RECT)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONUP:
+                if BFS_RECT.collidepoint(event.pos):
+                    mode = 'bfs'
+                    display_mode = False
+                    break
+                elif DFS_RECT.collidepoint(event.pos):
+                    mode = 'dfs'
+                    display_mode = False
+                    break
+                elif UNIFORM_RECT.collidepoint(event.pos):
+                    mode = 'uniform'
+                    display_mode = False
+                    break
+                elif GREEDY_RECT.collidepoint(event.pos):
+                    mode = 'greedy'
+                    display_mode = False
+                    break
+                #elif ASTAR_RECT.collidepoint(event.pos):
+                    #mode = 'astar'
+                    #display_mode = False
+                    #break
+                
+        if(display_mode != False):
+            pygame.display.update()
+    
+            
+    while display_level:
+        WINDOW.fill(BLUE)
+        WINDOW.blit(CHOOSELEVEL_SURF, CHOOSELEVEL_RECT)
+        WINDOW.blit(LEVEL1_SURF, LEVEL1_RECT)
+        WINDOW.blit(LEVEL2_SURF, LEVEL2_RECT)
+        WINDOW.blit(LEVEL3_SURF, LEVEL3_RECT)
+        WINDOW.blit(LEVEL4_SURF, LEVEL4_RECT)
+        WINDOW.blit(LEVEL5_SURF, LEVEL5_RECT)
+        WINDOW.blit(LEVEL6_SURF, LEVEL6_RECT)
+        WINDOW.blit(LEVEL7_SURF, LEVEL7_RECT)
+        WINDOW.blit(LEVEL8_SURF, LEVEL8_RECT)
+        WINDOW.blit(LEVEL9_SURF, LEVEL9_RECT)
+        WINDOW.blit(LEVEL10_SURF, LEVEL10_RECT)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONUP:
+                if LEVEL1_RECT.collidepoint(event.pos):
+                    level = level1
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL2_RECT.collidepoint(event.pos):
+                    level = level2
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL3_RECT.collidepoint(event.pos):
+                    level = level3
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL4_RECT.collidepoint(event.pos):
+                    level = level4
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL5_RECT.collidepoint(event.pos):
+                    level = level5
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL6_RECT.collidepoint(event.pos):
+                    level = level6
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL7_RECT.collidepoint(event.pos):
+                    level = level7
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL8_RECT.collidepoint(event.pos):
+                    level = level8
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL9_RECT.collidepoint(event.pos):
+                    level = level9
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL10_RECT.collidepoint(event.pos):
+                    level = level10
+                    initial_level = level
+                    display_level = False
+                    break
+                
+        if(display_level != False):
+            pygame.display.update()
+            
+    
+    rows, cols = len(level), len(level)
+    square_size = square_width // cols    
+    
+    board = Board(level, square_size)
+    allMoves = []
+    path = None
             
 # =============================================================================
 #     if(mode == 'Player'):
@@ -63,6 +175,14 @@ def main(level, mode):
     
     if(mode == 'bfs'):
         path = bfs(level)
+    elif(mode == 'dfs'):
+        path = dfs(level)
+    elif(mode == 'uniform'):
+        path = uniform_cost(level)
+    elif(mode == 'greedy'):
+        path = greedy(level)
+    #elif(mode == 'astar'):
+        #path = astar(level)
     
     
     while run:
@@ -111,7 +231,7 @@ def main(level, mode):
                 board = Board(level, square_size)
                 
         
-        elif(mode == 'bfs'):
+        else:
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
@@ -132,7 +252,7 @@ def main(level, mode):
                         path = None
                     elif QUIT_RECT.collidepoint(event.pos):
                         terminate()
-                        run = false
+                        run = False
                         break
                     
         if(run != False):
@@ -146,6 +266,7 @@ def terminate():
 # run the main function only if this module is executed as the main script
 # (if you import this as a module then nothing is executed)
 if __name__=="__main__":
+    main()
     #main(level1, 'player')
     #main(level2, 'player')
     #main(level3, 'player')
@@ -155,7 +276,7 @@ if __name__=="__main__":
     #main(level7, 'player')
     #main(level8, 'player')
     #main(level9, 'player')
-    main(level10, 'player')
+    #main(level10, 'player')
     #main(level1, 'bfs')
     #main(level2, 'bfs')
     #main(level3, 'bfs')
@@ -166,3 +287,34 @@ if __name__=="__main__":
     #main(level8, 'bfs')
     #main(level9, 'bfs')
     #main(level10, 'bfs')
+    #main(level1, 'dfs')
+    #main(level2, 'dfs')
+    #main(level3, 'dfs')
+    #main(level4, 'dfs')
+    #main(level5, 'dfs')
+    #main(level6, 'dfs')
+    #main(level7, 'dfs')
+    #main(level8, 'dfs')
+    #main(level9, 'dfs')
+    #main(level10, 'dfs')
+    #main(level1, 'uniform_cost')
+    #main(level2, 'uniform_cost')
+    #main(level3, 'uniform_cost')
+    #main(level4, 'uniform_cost')
+    #main(level5, 'uniform_cost')
+    #main(level6, 'uniform_cost')
+    #main(level7, 'uniform_cost')
+    #main(level8, 'uniform_cost')
+    #main(level9, 'uniform_cost')
+    #main(level10, 'uniform_cost')
+    #main(level1, 'greedy')
+    #main(level2, 'greedy')
+    #main(level3, 'greedy')
+    #main(level4, 'greedy')
+    #main(level5, 'greedy')
+    #main(level6, 'greedy')
+    #main(level7, 'greedy')
+    #main(level8, 'greedy')
+    #main(level9, 'greedy')
+    #main(level10, 'greedy')
+    
