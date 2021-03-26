@@ -1,6 +1,5 @@
 from states import *
 import time
-from pythonds.basic.stack import Stack
 from levels import *
 
 def bfs(start):
@@ -35,6 +34,7 @@ def bfs(start):
 
     return path
 
+
 # =============================================================================
 # print(bfs([
 #      		['X','-','-','IY'],
@@ -43,7 +43,6 @@ def bfs(start):
 #      		['X','FY','-','-']
 #  		]))
 #   
-#     
 # test2 = [
 #      		['-','-','-','FR'],
 #      		['IR','-','X','-'],
