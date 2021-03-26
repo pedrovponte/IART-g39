@@ -50,33 +50,35 @@ def iterativeDeepening(start, maxDepth=17):
 
     return path
 
+
 # =============================================================================
-print(iterativeDeepening([
-		['X','-','-','IY'],
-		['IB','-','-','-'],
-		['X','FB','-','-'],
-		['X','FY','-','-']
-		]))
-
-test2 = [
-		['-','-','-','FR'],
-		['IR','-','X','-'],
-		['X','IG','-','-'],
-		['-','-','-','FG']
-		]
-print(iterativeDeepening(test2))
-
-test3 = [
-		['-','-','-','-','FB'],
-		['-','-','IB','-','X'],
-		['-','-','-','X','-'],
-		['-','IB','X','-','FB'],
-      ['X', '-', '-', '-','-']
-		]
- 
-print(iterativeDeepening(test3))
-
-print(iterativeDeepening(level10))
+# print(iterativeDeepening([
+# 		['X','-','-','IY'],
+# 		['IB','-','-','-'],
+# 		['X','FB','-','-'],
+# 		['X','FY','-','-']
+# 		]))
+# 
+# test2 = [
+# 		['-','-','-','FR'],
+# 		['IR','-','X','-'],
+# 		['X','IG','-','-'],
+# 		['-','-','-','FG']
+# 		]
+# print(iterativeDeepening(test2))
+# 
+# test3 = [
+# 		['-','-','-','-','FB'],
+# 		['-','-','IB','-','X'],
+# 		['-','-','-','X','-'],
+# 		['-','IB','X','-','FB'],
+#       ['X', '-', '-', '-','-']
+# 		]
+#  
+# print(iterativeDeepening(test3))
+# 
+# print(iterativeDeepening(level10))
 # =============================================================================
+
 
 

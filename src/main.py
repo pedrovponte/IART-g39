@@ -8,6 +8,8 @@ from bfs import *
 from dfs import *
 from uniform_cost import *
 from greedy import *
+from aStar import *
+from iterativeDeepening import *
 import msvcrt as m
 
 FPS = 60
@@ -57,6 +59,7 @@ def main():
         WINDOW.blit(UNIFORM_SURF, UNIFORM_RECT)
         WINDOW.blit(GREEDY_SURF, GREEDY_RECT)
         WINDOW.blit(ASTAR_SURF, ASTAR_RECT)
+        WINDOW.blit(ITERATIVE_SURF, ITERATIVE_RECT)
         
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP:
@@ -76,10 +79,14 @@ def main():
                     mode = 'greedy'
                     display_mode = False
                     break
-                #elif ASTAR_RECT.collidepoint(event.pos):
-                    #mode = 'astar'
-                    #display_mode = False
-                    #break
+                elif ASTAR_RECT.collidepoint(event.pos):
+                    mode = 'astar'
+                    display_mode = False
+                    break
+                elif ITERATIVE_RECT.collidepoint(event.pos):
+                    mode = 'iterative'
+                    display_mode = False
+                    break
                 
         if(display_mode != False):
             pygame.display.update()
@@ -181,8 +188,10 @@ def main():
         path = uniform_cost(level)
     elif(mode == 'greedy'):
         path = greedy(level)
-    #elif(mode == 'astar'):
-        #path = astar(level)
+    elif(mode == 'astar'):
+        path = aStar(level)
+    elif(mode == 'iterative'):
+        path = iterativeDeepening(level)
     
     
     while run:

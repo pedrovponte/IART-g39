@@ -15,7 +15,7 @@ class Node:
         # Contains the path cost of this node from depth 0. Not used for depth/breadth first.
         self.cost = cost
 
-        self.heuristic=None
+        self.heuristic = None
 
 
 # returns true if final state is reached
