@@ -1,8 +1,10 @@
 import pygame
 from utils import *
 
-"""
+
 # images
+
+"""
 X_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/wall.png')
 W_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/white_tile.png')
 IB_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/blue_initial_tile.png')
