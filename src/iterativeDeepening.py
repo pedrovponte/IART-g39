@@ -2,11 +2,11 @@ from states import *
 import time
 from levels import *
 
-def dfs(start, depth=14):
+def iterativeDeepening(start, maxDepth=17):
     seen = []
 
     startTime = time.time()
-    print("DFS start")
+    print("Iterative Deepening start")
 
     start_node=Node(start, None, None, 0, 0)
     dfs_stack=[]
@@ -15,21 +15,25 @@ def dfs(start, depth=14):
     path=[]
     seen.append(current.state)
 
-    while(objectiveTest(current.state)!=True):
-        temp=expand_node(current)
-        #for i in temp:
-        #    print(i.state)
-        for item in temp:
-            if (item.state not in seen and item.state not in dfs_stack):
-                dfs_stack.insert(0,item)
+    for i in range(maxDepth+1):
+        while objectiveTest(current.state)==False:
+            temp=expand_node(current)
+            for item in temp:
+                if (item.depth<=i):
+                    dfs_stack.insert(0,item)
+                else:
+                    continue
+            if len(dfs_stack)!=0:
+                current=dfs_stack.pop()
+                seen.append(current.state)
             else:
-                continue
-        current=dfs_stack.pop()
-        seen.append(current.state)
-        while (current.depth>depth):
-            if len(dfs_stack)==0:
-                return None
-            current=dfs_stack.pop()
+                dfs_stack.append(start_node)
+                seen=[]
+                break
+        if (objectiveTest(current.state)):            
+            break
+        elif i==maxDepth:
+            return "No Results Found"
 
     while(current.parent!=None):
         path.insert(0,current.operator)
@@ -46,9 +50,8 @@ def dfs(start, depth=14):
 
     return path
 
-
 # =============================================================================
-print(dfs([
+print(iterativeDeepening([
 		['X','-','-','IY'],
 		['IB','-','-','-'],
 		['X','FB','-','-'],
@@ -61,7 +64,7 @@ test2 = [
 		['X','IG','-','-'],
 		['-','-','-','FG']
 		]
-print(dfs(test2))
+print(iterativeDeepening(test2))
 
 test3 = [
 		['-','-','-','-','FB'],
@@ -71,9 +74,9 @@ test3 = [
       ['X', '-', '-', '-','-']
 		]
  
-print(dfs(test3))
+print(iterativeDeepening(test3))
 
-print(dfs(level10))
+print(iterativeDeepening(level10))
 # =============================================================================
 
 
