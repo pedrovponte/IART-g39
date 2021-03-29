@@ -2,12 +2,12 @@ from dfs import dfs
 from states import *
 import time
 from pythonds.basic.stack import Stack
-
+from levels import *
 
 
 
 def h(state): #uma no sitio certo
-    print(state.state)
+    # print(state.state)
     dmatch=0
     for row in state.state:
         for cel in row:
@@ -74,13 +74,15 @@ def greedy(start):
 
 
 
-# =============================================================================
-print(greedy([
-     ['X','-','-','IY'],
-     ['IB','-','-','-'],
-     ['X','FB','-','-'],
-     ['X','FY','-','-']
-     ]))
 
-# print(greedy(level6))
 # =============================================================================
+# print(greedy([
+#      ['X','-','-','IY'],
+#      ['IB','-','-','-'],
+#      ['X','FB','-','-'],
+#      ['X','FY','-','-']
+#      ]))
+# 
+# print(greedy(level3))
+# =============================================================================
+

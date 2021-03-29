@@ -9,7 +9,6 @@ class Board:
         self.board = [] 
         self.input_board = input_board
         self.create_board(input_board)
-        print(self.board)
 
     def draw(self, window):
         window.fill(BLUE)
@@ -26,7 +25,6 @@ class Board:
                     piece.draw_piece(window)
     
     def create_board(self, input_board):
-        print(len(input_board))
         for row in range(len(input_board)):
             self.board.append([])
             for col in range(len(input_board)):

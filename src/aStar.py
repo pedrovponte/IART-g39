@@ -5,21 +5,17 @@ from levels import *
 import math
 
 def aStar(start, depth = 100):
-    goal = getGoalBoard(start)
-
     startTime = time.time()
     print("A* start")
 
     root = Node(start, None, None, 0, 0)
     stack = [root]
 
-    root.heuristic = heuristic1(root.state, goal)
+    root.heuristic = heuristic(root.state)
     visited = []
     depth = 1
 
     while stack:
-        #print("visited: ", len(visited))
-        #print("DEPTH: ", depth)
         stack.sort(key = lambda x: x.heuristic)
 
         s = stack.pop(0)
@@ -31,11 +27,8 @@ def aStar(start, depth = 100):
             while current is not None:
                 path.append(current.operator)
                 current = current.parent
-                # print("PATH: ", path)
-            
-            #print("LAST: ", path[len(path)-1])
-            path.pop(len(path)-1)
-            #print("NEW PATH: ", path)
+                
+            path.pop(len(path)-1) # delete None from array
 
             endTime = time.time()
 
@@ -52,7 +45,7 @@ def aStar(start, depth = 100):
             expanded = expand_node(s)
 
             for x in expanded:
-                x.heuristic = s.heuristic + heuristic1(x.state, goal)
+                x.heuristic = s.heuristic + heuristic(x.state)
                 stack.append(x)
 
             visited.append(s)    
@@ -75,38 +68,119 @@ def getGoalBoard(board):
     return goal
 
             
-def heuristic(board, goal):
-    h = 0
+# =============================================================================
+# def heuristic(board, goal):
+#     h = 0
+#     
+#     for i, row in enumerate(board):
+#         for j, col in enumerate(row):
+#             bij = board[i][j]
+#             i_b = i
+#             j_b = j
+# 
+#             for i_g, r in enumerate(goal):
+#                 for j_g, c in enumerate(r):
+#                     if c == bij:
+#                         h += (abs(i_g - i_b) + abs(j_g - j_b))
+# 
+#     return h
+# 
+# def heuristic1(board, goal):
+#     h = 0
+#     
+#     for i, row in enumerate(board):
+#         for j, col in enumerate(row):
+#             bij = board[i][j]
+#             i_b = i
+#             j_b = j
+# 
+#             for i_g, r in enumerate(goal):
+#                 for j_g, c in enumerate(r):
+#                     if c == bij:
+#                         h += math.ceil(math.sqrt((abs(i_g - i_b))**2 + (abs(j_g - j_b))**2))
+# 
+#     return h
+# =============================================================================
+
+def heuristic(board):
+    points = 0
+    initialPieces = getPiecePositions(board)
+    finalPieces = getFinalPiecePositions(board)
+    for initPiece in initialPieces:
+        points_piece = []
+        for finalPiece in finalPieces:
+            if finalPiece[2] == initPiece[2]:
+                aux_points = 0
+                if initPiece[0] == finalPiece[0]:
+                    aux_points += checkWallBetweenRow(initPiece[0], initPiece[1], finalPiece[1], board)
+                if initPiece[1] == finalPiece[1]:
+                    aux_points += checkWallBetweenCol(initPiece[0], initPiece[1], finalPiece[0], board)
+                if initPiece[0] != finalPiece[0]:
+                    aux_points += 1
+                if initPiece[1] != finalPiece[1]:
+                    aux_points += 1
+                points_piece.append(aux_points)
+        points += min(points_piece)
+    print('POINTS: ', points)
+    return points
+        
     
-    for i, row in enumerate(board):
-        for j, col in enumerate(row):
-            bij = board[i][j]
-            i_b = i
-            j_b = j
-
-            for i_g, r in enumerate(goal):
-                for j_g, c in enumerate(r):
-                    if c == bij:
-                        h += (abs(i_g - i_b) + abs(j_g - j_b))
-
-    return h
-
-def heuristic1(board, goal):
-    h = 0
+        
     
-    for i, row in enumerate(board):
-        for j, col in enumerate(row):
-            bij = board[i][j]
-            i_b = i
-            j_b = j
+    
+def getPiecePositions(board):
+    pieces = []
+    
+    for row in range(0, len(board)):
+        for col in range(0, len(board[row])):
+            if((board[row][col][0] == 'I' and len(board[row][col]) < 3) or (board[row][col][0] == 'I' and len(board[row][col]) > 2 and board[row][col][3] != board[row][col][1])):
+               pieces.append([row, col, board[row][col][1]])
+    return pieces 
+    
 
-            for i_g, r in enumerate(goal):
-                for j_g, c in enumerate(r):
-                    if c == bij:
-                        h += math.ceil(math.sqrt((abs(i_g - i_b))**2 + (abs(j_g - j_b))**2))
 
-    return h
+def getFinalPiecePositions(board):
+    pieces = []
+    
+    for row in range(0, len(board)):
+        for col in range(0, len(board[row])):
+            if((board[row][col][0] == 'F') and (len(board[row][col]) < 3)):
+               pieces.append([row, col, board[row][col][1]])
+            elif(len(board[row][col]) > 2 and (len(board[row][col]) > 2 and board[row][col][1] != board[row][col][3])):
+                pieces.append([row, col, board[row][col][3]])
+    return pieces 
+    
+                    
+                
+def checkWallBetweenRow(pieceX, pieceY, finalY, board):
+    if(pieceY < finalY):
+        init = pieceY
+        final = finalY
+    else:
+        init = finalY
+        final = pieceY
+        
+    for i in range(init, final):
+        if(board[pieceX][i] == 'X'): # caso tenha uma parede, vai ter de fazer pelo menos 2 movimentos
+            return 2
+        else:
+            return 0
+        
+def checkWallBetweenCol(pieceX, pieceY, finalX, board):
+    if(pieceX < finalX):
+        init = pieceX
+        final = finalX
+    else:
+        init = finalX
+        final = pieceX
+    
+    for i in range(init, final):
+        if(board[i][pieceY] == 'X'):
+            return 2
+        else:
+            return 0
 
-# print(aStar(level6))
+
+# print(aStar(level8))
     
     

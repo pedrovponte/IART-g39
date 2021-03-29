@@ -170,28 +170,25 @@ def main():
     allMoves = []
     path = None
             
-# =============================================================================
-#     if(mode == 'Player'):
-#         pygame.display.update()
-#         while display_level:
-#             WINDOW.fill(BLUE)
-#             WINDOW.blit(LEVEL1_SURF, LEVEL1_RECT)
-# =============================================================================
-            
-    
     
     if(mode == 'bfs'):
         path = bfs(level)
+        print("ALL MOVES: ", path)
     elif(mode == 'dfs'):
         path = dfs(level)
+        print("ALL MOVES: ", path)
     elif(mode == 'uniform'):
         path = uniform_cost(level)
+        print("ALL MOVES: ", path)
     elif(mode == 'greedy'):
         path = greedy(level)
+        print("ALL MOVES: ", path)
     elif(mode == 'astar'):
         path = aStar(level)
+        print("ALL MOVES: ", path)
     elif(mode == 'iterative'):
         path = iterativeDeepening(level)
+        print("ALL MOVES: ", path)
     
     
     while run:
@@ -233,7 +230,6 @@ def main():
             
             
             if move:
-                print("MOVE: ", move)
                 level = effects(level, move)
                 allMoves.append(move)
                 print("ALL MOVES: ", allMoves)
@@ -244,15 +240,10 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
-                        print("PATH: ", path)
                         move = path.pop(0)
-                        print("MOVE: ", move)
                         level = effects(level, move)
                         allMoves.append(move)
-                        print("ALL MOVES: ", allMoves)
-                        print("LEVEL: ", level)
                         board = Board(level, square_size)
-                        print(level)
                 if event.type == pygame.MOUSEBUTTONUP:
                     if RESET_RECT.collidepoint(event.pos):
                         level = initial_level
