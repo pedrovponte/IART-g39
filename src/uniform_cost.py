@@ -11,16 +11,20 @@ def uniform_cost(start,):
 
     start_node=Node(start, None, None, 0, 0)
     fringe=[]
+    visited = []
     path=[]
     fringe.append(start_node)
     current=fringe.pop(0)
     while(objectiveTest(current.state)!=True):
         temp=expand_node(current)
         for item in temp:
-            item.depth+=current.depth
-            fringe.append(item)
+            if item.state not in visited:
+                item.depth+=current.depth
+                fringe.append(item)
         fringe.sort(key =lambda x: x.depth)
         current=fringe.pop(0)
+        visited.append(current.state)
+        
     while(current.parent!=None):
         path.insert(0,current.operator)
         current=current.parent
@@ -46,7 +50,7 @@ def uniform_cost(start,):
 #     ['X','FY','-','-']
 #     ]))
 #    
-# print(uniform_cost(level7))
+print(uniform_cost(level10))
 # =============================================================================
 
 

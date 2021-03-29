@@ -11,7 +11,7 @@ def aStar(start, depth = 100):
     root = Node(start, None, None, 0, 0)
     stack = [root]
 
-    root.heuristic = heuristic(root.state) + h(root.state)
+    root.heuristic = heuristic(root.state) + heuristic2(root.state)
     visited = []
     depth = 1
 
@@ -191,6 +191,6 @@ def checkWallBetweenCol(pieceX, pieceY, finalX, board):
             return 0
 
 
-print(aStar(level10))
+print(aStar(level5))
     
     
