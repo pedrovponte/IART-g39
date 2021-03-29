@@ -1,57 +1,42 @@
 from dfs import dfs
+from heuristics import *
 from states import *
 import time
 from pythonds.basic.stack import Stack
 from levels import *
 
 
-
-def h(state): #uma no sitio certo
-    # print(state.state)
-    dmatch=0
-    for row in state.state:
-        for cel in row:
-            if(cel[0]=='F'):
-                dmatch+=1
-    state.heuristic=dmatch
-
-
-def h2(state): #mesma linha ou mesma coluna
-    dmatch=0
-    for row in state.state:
-        for cel in row:
-            for cel2 in row:
-                if(len(cel)==2 and len(cel2)==2):
-                    if(cel[1]=='B' and cel[0]=='I' and cel2[1]=='B' and cel2[0]=='F'):
-                        dmatch+=1
-                    if(cel[1]=='O' and cel[0]=='I' and cel2[1]=='O' and cel2[0]=='F'):
-                        dmatch+=1
-
-
-    state.heuristic=dmatch
-
-
-
-def greedy(start):
+def greedy(board):
     print("Greedy Start")
     startTime = time.time()
 
-
-    start_node=Node(start, None, None, 0, 0)
+    root=Node(board, None, None, 0, 0)
     fringe=[]
     path=[]
-    fringe.append(start_node)
+    fringe.append(root)
+
     current=fringe.pop(0)
+    current.heuristic=heuristic(board)
+
+    seen = []
+    seen.append(current.state)    
+    
     while(objectiveTest(current.state)!=True):
-        fringe.extend(expand_node(current))
+        temp=expand_node(current)
+        for item in temp:
+            # Check for cicles and repeated states
+            if (item.state not in seen and item.state not in fringe):
+                fringe.append(item)
+            else:
+                continue
         for item in fringe:
-            h(item)
+            item.heuristic=heuristic(board)+heuristic2(board)+heuristic3(board)
         fringe.sort(key =lambda x: x.heuristic)
         current=fringe.pop(0)
+        seen.append(current.state)
     while(current.parent!=None):
         path.insert(0,current.operator)
         current=current.parent
-
 
     endTime = time.time()
 
@@ -66,23 +51,8 @@ def greedy(start):
 
 
 
-
-
-
-    ######################################################################################################
-
-
-
-
-
 # =============================================================================
-# print(greedy([
-#      ['X','-','-','IY'],
-#      ['IB','-','-','-'],
-#      ['X','FB','-','-'],
-#      ['X','FY','-','-']
-#      ]))
 # 
-# print(greedy(level3))
+print(greedy(level2))
 # =============================================================================
 
