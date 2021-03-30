@@ -15,33 +15,31 @@ def aStar(start, depth = 100):
     # Create Root node and add to stack
     root = Node(start, None, None, 0, 0)
     stack = [root]
-
-    # Calculates heuristic of root - not needed
-    # root.heuristic = heuristic(root.state) #+ heuristic2(root.state) + heuristic3(root.state)
-    visited = []
+    
     current=stack.pop(0)
 
+    # Records all nodes already seen
     seen=[]
     seen.append(current.state)
 
     while objectiveTest(current.state)==False:
+        # Gets all expanded nodes from current node
         expanded = expand_node(current)
+
         for x in expanded:
+            # calculates heuristic = number of rows/columns inline with final destinations plus depth
             x.heuristic = heuristic(x.state) + x.depth
+
             if x.state not in seen:
+                # Adds to stack if hasn't already been seen
                 stack.append(x)
                 seen.append(x.state)
-                #print(x.state)
-                
-        #print("----------------------------")
-        '''for i in stack:
-            print(i.state)'''
-        #print("S")
-        #print(seen)
-        # Sort by heuristic value
+
+        # Sorts stack by heuristic value and updates current node
         stack.sort(key = lambda x: x.heuristic)
         current = stack.pop(0)
-    #print("H")
+
+    # Gets the resulting path
     path = []
     while current.parent is not None:
         path.insert(0,current.operator)
@@ -49,6 +47,7 @@ def aStar(start, depth = 100):
 
     endTime = time.time()
 
+    # Calculates and prints the time
     timeElapsed = endTime - startTime
 
     if timeElapsed>1:
@@ -58,7 +57,7 @@ def aStar(start, depth = 100):
 
     return path
 
-print(aStar(level18))
+# print(aStar(level20))
 
     
     

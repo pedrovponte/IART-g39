@@ -13,9 +13,9 @@ def bfs(start):
     start_node=Node(start, None, None, 0, 0)
     
     # A list (can act as a queue) for the nodes.
-    fringe=[]
-    fringe.append(start_node)
-    current=fringe.pop(0)
+    bfs_stack=[]
+    bfs_stack.append(start_node)
+    current=bfs_stack.pop(0)
     path=[]
     seen.append(current.state)    
     
@@ -23,12 +23,13 @@ def bfs(start):
         temp=expand_node(current)
         for item in temp:
             # Check for cicles and repeated states
-            if (item.state not in seen and item.state not in fringe):
-                fringe.append(item)
+            if (item.state not in seen):
+                bfs_stack.append(item)
             else:
                 continue
-        current=fringe.pop(0)
+        current=bfs_stack.pop(0)
         seen.append(current.state)
+    print(current.state)
     while(current.parent!=None):
         path.insert(0,current.operator)
         current=current.parent
@@ -37,10 +38,10 @@ def bfs(start):
 
     timeElapsed = endTime - startTime
 
-    #if timeElapsed>1:
-    print("Time: " + str(round(timeElapsed,10)) + "s")
-    #else:
-        #print("Time: " + str(round(timeElapsed*1000,3)) + "ms")
+    if timeElapsed>1:
+        print("Time: " + str(round(timeElapsed,10)) + "s")
+    else:
+        print("Time: " + str(round(timeElapsed*1000,3)) + "ms")
 
     return path
 

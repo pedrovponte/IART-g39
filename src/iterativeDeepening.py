@@ -9,9 +9,9 @@ def iterativeDeepening(start, maxDepth=17):
     print("Iterative Deepening start")
 
     start_node=Node(start, None, None, 0, 0)
-    dfs_stack=[]
-    dfs_stack.append(start_node)
-    current=dfs_stack.pop()
+    it_stack=[]
+    it_stack.append(start_node)
+    current=it_stack.pop()
     path=[]
     seen.append(current.state)
 
@@ -20,14 +20,14 @@ def iterativeDeepening(start, maxDepth=17):
             temp=expand_node(current)
             for item in temp:
                 if (item.depth<=i):
-                    dfs_stack.insert(0,item)
+                    it_stack.insert(0,item)
                 else:
                     continue
-            if len(dfs_stack)!=0:
-                current=dfs_stack.pop()
+            if len(it_stack)!=0:
+                current=it_stack.pop()
                 seen.append(current.state)
             else:
-                dfs_stack.append(start_node)
+                it_stack.append(start_node)
                 seen=[]
                 break
         if (objectiveTest(current.state)):            

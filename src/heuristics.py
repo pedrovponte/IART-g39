@@ -13,8 +13,6 @@ def heuristic(board):
     
     for initPiece in initialPieces:
         # print('INIT PIECE:', initPiece)
-        #points_piece = []
-        #choosed_piece = []
         # print('INIT FINAL PIECE:', finalPieces)
         for finalPiece in finalPieces:
             if finalPiece[2] == initPiece[2]:

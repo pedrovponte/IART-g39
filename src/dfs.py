@@ -20,7 +20,7 @@ def dfs(start, depth=14):
         #for i in temp:
         #    print(i.state)
         for item in temp:
-            if (item.state not in seen and item.state not in dfs_stack):
+            if (item.state not in seen):
                 dfs_stack.insert(0,item)
             else:
                 continue
