@@ -10,38 +10,39 @@ def heuristic(board):
     points = 0
     initialPieces = getPiecePositions(board)
     finalPieces = getFinalPiecePositions(board)
+    
     for initPiece in initialPieces:
         # print('INIT PIECE:', initPiece)
-        points_piece = []
-        choosed_piece = []
+        #points_piece = []
+        #choosed_piece = []
         # print('INIT FINAL PIECE:', finalPieces)
         for finalPiece in finalPieces:
             if finalPiece[2] == initPiece[2]:
-                aux_points = 0
+                #aux_points = 0
                 if initPiece[0] == finalPiece[0]:
-                    aux_points += checkWallBetweenRow(initPiece[0], initPiece[1], finalPiece[1], board)
+                    points += checkWallBetweenRow(initPiece[0], initPiece[1], finalPiece[1], board)
                 if initPiece[1] == finalPiece[1]:
-                    aux_points += checkWallBetweenCol(initPiece[0], initPiece[1], finalPiece[0], board)
+                    points += checkWallBetweenCol(initPiece[0], initPiece[1], finalPiece[0], board)
                 if initPiece[0] != finalPiece[0]:
-                    aux_points += 1
+                    points += 1
                 if initPiece[1] != finalPiece[1]:
-                    aux_points += 1
-                points_piece.append(aux_points)
-                choosed_piece.append(finalPiece)
-        # print('AUX_POINTS: ', aux_points)
-        # print('CHOOSED_PIECE: ', choosed_piece)
+                    points += 1
+                #points_piece.append(aux_points)
+                #choosed_piece.append(finalPiece)
+        '''print('AUX_POINTS: ', aux_points)
+        print('CHOOSED_PIECE: ', choosed_piece)
         min_value = min(points_piece)
         min_index = points_piece.index(min_value)
-        # print('MIN_INDEX: ', min_index)
+        print('MIN_INDEX: ', min_index)
         choosed = choosed_piece[min_index]
         points += min_value
-        finalPieces.remove(choosed)
+        finalPieces.remove(choosed)'''
         # print('FINALPIECES: ', finalPieces)
         # time.sleep(2)
         
-    print('POINTS: ', points)
+    #print('POINTS: ', points)
     return points
-        
+
 # 2º heuristic - move to position that puts more pieces in the correct place
 
 def heuristic2(board):
@@ -175,12 +176,18 @@ def calculateManhattan(board):
                 manDict += abs(item[0]-item2[0]) + abs(item[1]- item2[1])
     return manDict
 
-print(calculateManhattan([
+'''print(calculateManhattan([
 		['-','X','FG','X'],
 		['X','X','FR','-'],
 		['X','IR','-','-'],
 		['IG','-','X','X']
 		]))
+'''
 
-
-    
+print("H1")
+print(heuristic([
+        ['X', '-', '-', 'IR'],
+        ['X', '-', 'IO', 'X'],
+        ['X', '-', 'FO', '-'],
+        ['X', 'FR', 'X', '-']
+        ]))
