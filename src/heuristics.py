@@ -6,12 +6,15 @@ import math
 
 # 1º heuristic - move to position with more rows/columns of final destinations
 
-def heuristic(board): 
+def heuristic(board):
     points = 0
     initialPieces = getPiecePositions(board)
     finalPieces = getFinalPiecePositions(board)
     for initPiece in initialPieces:
+        # print('INIT PIECE:', initPiece)
         points_piece = []
+        choosed_piece = []
+        # print('INIT FINAL PIECE:', finalPieces)
         for finalPiece in finalPieces:
             if finalPiece[2] == initPiece[2]:
                 aux_points = 0
@@ -24,8 +27,18 @@ def heuristic(board):
                 if initPiece[1] != finalPiece[1]:
                     aux_points += 1
                 points_piece.append(aux_points)
-        points += min(points_piece)
-    
+                choosed_piece.append(finalPiece)
+        # print('AUX_POINTS: ', aux_points)
+        # print('CHOOSED_PIECE: ', choosed_piece)
+        min_value = min(points_piece)
+        min_index = points_piece.index(min_value)
+        # print('MIN_INDEX: ', min_index)
+        choosed = choosed_piece[min_index]
+        points += min_value
+        finalPieces.remove(choosed)
+        # print('FINALPIECES: ', finalPieces)
+        # time.sleep(2)
+        
     print('POINTS: ', points)
     return points
         
@@ -44,39 +57,37 @@ def heuristic2(board):
 def heuristic3(board):
     return calculateManhattan(board)
 
-            
+
 # =============================================================================
-# def heuristic(board, goal):
-#     h = 0
-#     
-#     for i, row in enumerate(board):
-#         for j, col in enumerate(row):
-#             bij = board[i][j]
-#             i_b = i
-#             j_b = j
-# 
-#             for i_g, r in enumerate(goal):
-#                 for j_g, c in enumerate(r):
-#                     if c == bij:
-#                         h += (abs(i_g - i_b) + abs(j_g - j_b))
-# 
-#     return h
-# 
-# def heuristic1(board, goal):
-#     h = 0
-#     
-#     for i, row in enumerate(board):
-#         for j, col in enumerate(row):
-#             bij = board[i][j]
-#             i_b = i
-#             j_b = j
-# 
-#             for i_g, r in enumerate(goal):
-#                 for j_g, c in enumerate(r):
-#                     if c == bij:
-#                         h += math.ceil(math.sqrt((abs(i_g - i_b))**2 + (abs(j_g - j_b))**2))
-# 
-#     return h
+# def heuristic4(board):
+#     points = 0
+#     initialPieces = getPiecePositions(board)
+#     finalPieces = getFinalPiecePositions(board)
+#     for initPiece in initialPieces:
+#         points_piece = []
+#         choosed_piece = []
+#         for finalPiece in finalPieces:
+#             if finalPiece[2] == initPiece[2]:
+#                 aux_points = 0
+#                 if initPiece[0] != finalPiece[0]:
+#                     aux_points += 1
+#                 if initPiece[1] != finalPiece[1]:
+#                     aux_points += 1
+#                 points_piece.append(aux_points)
+#                 choosed_piece.append(finalPiece)
+#         # print('AUX_POINTS: ', aux_points)
+#         # print('CHOOSED_PIECE: ', choosed_piece)
+#         min_value = min(points_piece)
+#         min_index = points_piece.index(min_value)
+#         # print('MIN_INDEX: ', min_index)
+#         choosed = choosed_piece[min_index]
+#         points += min_value
+#         finalPieces.remove(choosed)
+#         # print('FINALPIECES: ', finalPieces)
+#         
+#         
+#     print('POINTS: ', points)
+#     return points
 # =============================================================================
 
 
