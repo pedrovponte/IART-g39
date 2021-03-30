@@ -20,7 +20,7 @@ def aStar(start, depth = 100):
 
     # Records all nodes already seen
     seen=[]
-    seen.append(current.state)
+    seen.append(current)
 
     while objectiveTest(current.state)==False:
         # Gets all expanded nodes from current node
@@ -30,10 +30,14 @@ def aStar(start, depth = 100):
             # calculates heuristic = number of rows/columns inline with final destinations plus depth
             x.heuristic = heuristic(x.state) + x.depth
 
-            if x.state not in seen:
+            if any(y.state == x.state for y in seen)==False:
                 # Adds to stack if hasn't already been seen
                 stack.append(x)
-                seen.append(x.state)
+                seen.append(x)
+            for i in range(len(seen)):
+                if x.state==seen[i].state and x.depth<seen[i].depth:
+                    seen[i]=x
+                    stack.append(x)
 
         # Sorts stack by heuristic value and updates current node
         stack.sort(key = lambda x: x.heuristic)
@@ -57,7 +61,7 @@ def aStar(start, depth = 100):
 
     return path
 
-# print(aStar(level20))
+print(aStar(level20))
 
     
     
