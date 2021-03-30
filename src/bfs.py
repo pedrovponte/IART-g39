@@ -37,10 +37,10 @@ def bfs(start):
 
     timeElapsed = endTime - startTime
 
-    if timeElapsed>1:
-        print("Time: " + str(round(timeElapsed,3)) + "s")
-    else:
-        print("Time: " + str(round(timeElapsed*1000,3)) + "ms")
+    #if timeElapsed>1:
+    print("Time: " + str(round(timeElapsed,10)) + "s")
+    #else:
+        #print("Time: " + str(round(timeElapsed*1000,3)) + "ms")
 
     return path
 
@@ -74,7 +74,7 @@ def bfs(start):
 #   
 # print(bfs(test3))
 #     
-# print(bfs(level9))
+# print(bfs(level20))
 # 
 # =============================================================================
 

@@ -4,7 +4,7 @@ from pythonds.basic.stack import Stack
 from levels import *
 
 
-def uniform_cost(start,):
+def uniform_cost(start):
     print("Uniform cost start")
 
     startTime = time.time()
@@ -50,7 +50,7 @@ def uniform_cost(start,):
 #     ['X','FY','-','-']
 #     ]))
 #    
-print(uniform_cost(level10))
+# print(uniform_cost(level20))
 # =============================================================================
 
 
