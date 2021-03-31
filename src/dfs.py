@@ -75,7 +75,7 @@ def dfs(start, depth=14):
 #  
 # print(dfs(test3))
 # 
-# print(dfs(level20))
+print(dfs(level20))
 # =============================================================================
 
 
