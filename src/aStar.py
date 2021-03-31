@@ -61,7 +61,7 @@ def aStar(start, depth = 100):
 
     return path
 
-print(aStar(level1))
+print(aStar(level20))
 
     
     
