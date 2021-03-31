@@ -25,6 +25,7 @@ def main():
     display_alg = True
     display_mode = True
     clock = pygame.time.Clock()
+    moves = 0
     
     width, height = 840, 640
     square_width, square_height = 500, 500
@@ -105,56 +106,136 @@ def main():
         WINDOW.blit(LEVEL8_SURF, LEVEL8_RECT)
         WINDOW.blit(LEVEL9_SURF, LEVEL9_RECT)
         WINDOW.blit(LEVEL10_SURF, LEVEL10_RECT)
+        WINDOW.blit(LEVEL11_SURF, LEVEL11_RECT)
+        WINDOW.blit(LEVEL12_SURF, LEVEL12_RECT)
+        WINDOW.blit(LEVEL13_SURF, LEVEL13_RECT)
+        WINDOW.blit(LEVEL14_SURF, LEVEL14_RECT)
+        WINDOW.blit(LEVEL15_SURF, LEVEL15_RECT)
+        WINDOW.blit(LEVEL16_SURF, LEVEL16_RECT)
+        WINDOW.blit(LEVEL17_SURF, LEVEL17_RECT)
+        WINDOW.blit(LEVEL18_SURF, LEVEL18_RECT)
+        WINDOW.blit(LEVEL19_SURF, LEVEL19_RECT)
+        WINDOW.blit(LEVEL20_SURF, LEVEL20_RECT)
         
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP:
                 if LEVEL1_RECT.collidepoint(event.pos):
                     level = level1
+                    perfect = PERFECT1
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL2_RECT.collidepoint(event.pos):
                     level = level2
+                    perfect = PERFECT2
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL3_RECT.collidepoint(event.pos):
                     level = level3
+                    perfect = PERFECT3
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL4_RECT.collidepoint(event.pos):
                     level = level4
+                    perfect = PERFECT4
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL5_RECT.collidepoint(event.pos):
                     level = level5
+                    perfect = PERFECT5
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL6_RECT.collidepoint(event.pos):
                     level = level6
+                    perfect = PERFECT6
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL7_RECT.collidepoint(event.pos):
                     level = level7
+                    perfect = PERFECT7
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL8_RECT.collidepoint(event.pos):
                     level = level8
+                    perfect = PERFECT8
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL9_RECT.collidepoint(event.pos):
                     level = level9
+                    perfect = PERFECT9
                     initial_level = level
                     display_level = False
                     break
                 elif LEVEL10_RECT.collidepoint(event.pos):
                     level = level10
+                    perfect = PERFECT10
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL11_RECT.collidepoint(event.pos):
+                    level = level11
+                    perfect = PERFECT11
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL12_RECT.collidepoint(event.pos):
+                    level = level12
+                    perfect = PERFECT12
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL13_RECT.collidepoint(event.pos):
+                    level = level13
+                    perfect = PERFECT13
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL14_RECT.collidepoint(event.pos):
+                    level = level14
+                    perfect = PERFECT14
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL15_RECT.collidepoint(event.pos):
+                    level = level15
+                    perfect = PERFECT15
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL16_RECT.collidepoint(event.pos):
+                    level = level16
+                    perfect = PERFECT16
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL17_RECT.collidepoint(event.pos):
+                    level = level17
+                    perfect = PERFECT17
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL18_RECT.collidepoint(event.pos):
+                    level = level18
+                    perfect = PERFECT18
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL19_RECT.collidepoint(event.pos):
+                    level = level19
+                    perfect = PERFECT19
+                    initial_level = level
+                    display_level = False
+                    break
+                elif LEVEL20_RECT.collidepoint(event.pos):
+                    level = level20
+                    perfect = PERFECT20
                     initial_level = level
                     display_level = False
                     break
@@ -198,6 +279,9 @@ def main():
         board.draw(WINDOW)
         WINDOW.blit(RESET_SURF, RESET_RECT)
         WINDOW.blit(QUIT_SURF, QUIT_RECT)
+        WINDOW.blit(HINT_SURF, HINT_RECT)
+        PERFECT_SURF, PERFECT_RECT = makeText('Perfect Moves: ' + perfect, TEXTCOLORWHITE, 660, 150, 20)
+        
         
         if objectiveTest(level):
             pygame.display.update()
@@ -207,6 +291,9 @@ def main():
             break
         
         if(mode == 'player'):
+            WINDOW.blit(PERFECT_SURF, PERFECT_RECT)
+            MOVES_SURF, MOVES_RECT = makeText('Moves: ' + str(moves), TEXTCOLORWHITE, 700, 175, 20)
+            WINDOW.blit(MOVES_SURF, MOVES_RECT)
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP:
                     if event.key in (pygame.K_LEFT, pygame.K_a) and precond(level, "left"):
@@ -227,12 +314,17 @@ def main():
                         terminate()
                         run = False
                         continue
+                    elif HINT_RECT.collidepoint(event.pos):
+                        path = []
+                        path = aStar(level)
+                        move = path[0]
             
             
             if move:
                 level = effects(level, move)
                 allMoves.append(move)
                 print("ALL MOVES: ", allMoves)
+                moves = len(allMoves)
                 board = Board(level, square_size)
                 
         

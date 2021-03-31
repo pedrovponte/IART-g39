@@ -29,7 +29,6 @@ def bfs(start):
                 continue
         current=bfs_stack.pop(0)
         seen.append(current.state)
-    print(current.state)
     while(current.parent!=None):
         path.insert(0,current.operator)
         current=current.parent
@@ -75,7 +74,7 @@ def bfs(start):
 #   
 # print(bfs(test3))
 #     
-# print(bfs(level20))
+print(bfs(level20))
 # 
 # =============================================================================
 
