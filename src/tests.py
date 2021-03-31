@@ -5,93 +5,41 @@ from dfs import *
 from aStar import *
 from iterativeDeepening import *
 from levels import *
-import time
+import pandas as pd
 
-
-def uniform_cost_tests():
-    print('Level 1')
-    uniform_cost(level1)
-    print('Level 2')
-    uniform_cost(level2)
-    print('Level 3')
-    uniform_cost(level3)
-    print('Level 4')
-    uniform_cost(level4)
-    print('Level 5')
-    uniform_cost(level5)
-    print('Level 6')
-    uniform_cost(level6)
-    print('Level 7')
-    uniform_cost(level7)
-    print('Level 8')
-    uniform_cost(level8)
-    print('Level 9')
-    uniform_cost(level9)
-    print('Level 10')
-    uniform_cost(level10)
-    print('Level 11')
-    uniform_cost(level11)
-    print('Level 12')
-    uniform_cost(level12)
-    print('Level 13')
-    uniform_cost(level13)
-    print('Level 14')
-    uniform_cost(level14)
-    print('Level 15')
-    uniform_cost(level15)
-    print('Level 16')
-    uniform_cost(level16)
-    print('Level 17')
-    uniform_cost(level17)
-    print('Level 18')
-    uniform_cost(level18)
-    print('Level 19')
-    uniform_cost(level19)
-    print('Level 20')
-    uniform_cost(level20)
     
-def bfs_tests():
-    print('Level 1')
-    bfs(level1)
-    print('Level 2')
-    bfs(level2)
-    print('Level 3')
-    bfs(level3)
-    print('Level 4')
-    bfs(level4)
-    print('Level 5')
-    bfs(level5)
-    print('Level 6')
-    bfs(level6)
-    print('Level 7')
-    bfs(level7)
-    print('Level 8')
-    bfs(level8)
-    print('Level 9')
-    bfs(level9)
-    print('Level 10')
-    bfs(level10)
-    print('Level 11')
-    bfs(level11)
-    print('Level 12')
-    bfs(level12)
-    print('Level 13')
-    bfs(level13)
-    print('Level 14')
-    bfs(level14)
-    print('Level 15')
-    bfs(level15)
-    print('Level 16')
-    bfs(level16)
-    print('Level 17')
-    bfs(level17)
-    print('Level 18')
-    bfs(level18)
-    print('Level 19')
-    bfs(level19)
-    print('Level 20')
-    bfs(level20)
+levels = [level1, level2, level3, level4, level5, level6, level7, level8, level9, level10, level11, level12, level13, level14, level15, level16, level17, level18, level19, level20]
 
+def tests():
+    i = 0
+    dicTime = {}
+    for level in levels:
+        i += 1
+        print(i)
+        dicLevel = {}
+        pathBFS, timeBFS = bfs(level)
+        pathDFS, timeDFS = dfs(level)
+        pathUC, timeUC = uniform_cost(level)
+        pathID, timeID = iterativeDeepening(level)
+        pathG, timeG = greedy(level)
+        pathA, timeA = aStar(level)
         
-#uniform_cost_tests()
-bfs_tests()
+        dicLevel['BFS'] = timeBFS
+        dicLevel['DFS'] = timeDFS
+        dicLevel['Uniform Cost'] = timeUC
+        dicLevel['Iterative Deepening'] = timeID
+        dicLevel['Greedy'] = timeG
+        dicLevel['A*'] = timeA
+        
+        dicTime['Level ' + str(i)] = dicLevel
+        
+    print(dicTime)
+    times_data = pd.DataFrame(dicTime)
+    file_name = '../docs/export_python.xlsx'
+    times_data.to_excel(file_name)
+    
+tests()
+        
+        
+        
+        

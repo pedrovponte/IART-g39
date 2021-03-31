@@ -8,47 +8,49 @@ def iterativeDeepening(start, maxDepth=17):
     startTime = time.time()
     print("Iterative Deepening start")
 
-    start_node=Node(start, None, None, 0, 0)
-    it_stack=[]
+    start_node = Node(start, None, None, 0, 0)
+    it_stack = []
     it_stack.append(start_node)
-    current=it_stack.pop()
-    path=[]
+    current = it_stack.pop()
+    path = []
     seen.append(current.state)
 
-    for i in range(maxDepth+1):
-        while objectiveTest(current.state)==False:
-            temp=expand_node(current)
+    for i in range(maxDepth + 1):
+        print('Depth: ' + str(i))
+        while objectiveTest(current.state) == False:
+            temp = expand_node(current)
             for item in temp:
-                if (item.depth<=i):
-                    it_stack.insert(0,item)
+                if (item.depth <= i):
+                    it_stack.insert(0, item)
                 else:
                     continue
-            if len(it_stack)!=0:
-                current=it_stack.pop()
+            if len(it_stack) != 0:
+                current = it_stack.pop()
                 seen.append(current.state)
             else:
                 it_stack.append(start_node)
-                seen=[]
+                seen = []
                 break
         if (objectiveTest(current.state)):            
             break
-        elif i==maxDepth:
+        elif i == maxDepth:
             return "No Results Found"
 
-    while(current.parent!=None):
-        path.insert(0,current.operator)
-        current=current.parent
+    while(current.parent != None):
+        path.insert(0, current.operator)
+        current = current.parent
 
     endTime = time.time()
 
     timeElapsed = endTime - startTime
 
-    if timeElapsed>1:
-        print("Time: " + str(round(timeElapsed,3)) + "s")
+    if timeElapsed > 1:
+        print("Time: " + str(round(timeElapsed, 3)) + "s")
     else:
-        print("Time: " + str(round(timeElapsed*1000,3)) + "ms")
+        print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
+#    return path , str(round(timeElapsed,6))
 
 
 # =============================================================================
@@ -77,7 +79,7 @@ def iterativeDeepening(start, maxDepth=17):
 #  
 # print(iterativeDeepening(test3))
 # 
-# print(iterativeDeepening(level10))
+# print(iterativeDeepening(level20))
 # =============================================================================
 
 
