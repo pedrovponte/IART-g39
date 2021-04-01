@@ -14,11 +14,13 @@ def iterativeDeepening(start, maxDepth=17):
     current = it_stack.pop()
     path = []
     seen.append(current.state)
+    expanded_nodes = 0
 
     for i in range(maxDepth + 1):
-        print('Depth: ' + str(i))
         while objectiveTest(current.state) == False:
             temp = expand_node(current)
+            expanded_nodes += 1
+            
             for item in temp:
                 if (item.depth <= i):
                     it_stack.insert(0, item)
@@ -50,7 +52,8 @@ def iterativeDeepening(start, maxDepth=17):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
-#    return path , str(round(timeElapsed,6))
+#    return str(round(timeElapsed,6))
+#    return expanded_nodes
 
 
 # =============================================================================
@@ -79,7 +82,7 @@ def iterativeDeepening(start, maxDepth=17):
 #  
 # print(iterativeDeepening(test3))
 # 
-# print(iterativeDeepening(level20))
+# print(iterativeDeepening(level10))
 # =============================================================================
 
 

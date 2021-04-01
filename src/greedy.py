@@ -19,10 +19,13 @@ def greedy(board):
     current.heuristic = heuristic(board)
 
     seen = []
-    seen.append(current.state)    
+    seen.append(current.state)   
+    expanded_nodes = 0
     
     while(objectiveTest(current.state) != True):
         temp = expand_node(current)
+        expanded_nodes += 1
+        
         for item in temp:
             # Check for cicles and repeated states
             if (item.state not in seen and item.state not in greedy_stack):
@@ -48,12 +51,13 @@ def greedy(board):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
-#    return path, str(round(timeElapsed,6))
+#    return str(round(timeElapsed,6))
+#    return expanded_nodes
 
 
 
 # =============================================================================
 # 
-print(greedy(level20))
+# print(greedy(level20))
 # =============================================================================
 

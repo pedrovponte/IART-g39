@@ -18,9 +18,11 @@ def bfs(start):
     current = bfs_stack.pop(0)
     path = []
     seen.append(current.state)    
+    expanded_nodes = 0
     
     while(objectiveTest(current.state) != True):
         temp = expand_node(current)
+        expanded_nodes += 1
         for item in temp:
             # Check for cicles and repeated states
             if (item.state not in seen):
@@ -42,8 +44,10 @@ def bfs(start):
     else:
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
+
     return path
-#    return path, str(round(timeElapsed,6))
+#    return str(round(timeElapsed,6))
+#    return expanded_nodes
 
 
 

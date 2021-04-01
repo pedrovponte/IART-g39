@@ -14,9 +14,11 @@ def dfs(start, depth=14):
     current = dfs_stack.pop()
     path = []
     seen.append(current.state)
+    expanded_nodes = 0
 
     while(objectiveTest(current.state) != True):
         temp = expand_node(current)
+        expanded_nodes += 1
         #for i in temp:
         #    print(i.state)
         for item in temp:
@@ -45,7 +47,8 @@ def dfs(start, depth=14):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
- #   return path, str(round(timeElapsed,6))
+#    return str(round(timeElapsed,6))
+#    return expanded_nodes
 
 
 
@@ -75,7 +78,7 @@ def dfs(start, depth=14):
 #  
 # print(dfs(test3))
 # 
-print(dfs(level20))
+# print(dfs(level20))
 # =============================================================================
 
 

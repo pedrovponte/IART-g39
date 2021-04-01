@@ -21,10 +21,12 @@ def aStar(start, depth = 100):
     # Records all nodes already seen
     seen = []
     seen.append(current)
+    expanded_nodes = 0
 
     while objectiveTest(current.state) == False:
         # Gets all expanded nodes from current node
         expanded = expand_node(current)
+        expanded_nodes += 1
 
         for x in expanded:
             # calculates heuristic = number of rows/columns inline with final destinations plus depth
@@ -59,10 +61,12 @@ def aStar(start, depth = 100):
     else:
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
+    
     return path
-#    return path, str(round(timeElapsed,6))
+#    return str(round(timeElapsed,6))
+#    return expanded_nodes
 
-# print(aStar(level1))
+# print(aStar(level20))
 
     
     

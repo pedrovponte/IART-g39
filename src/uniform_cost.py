@@ -15,8 +15,12 @@ def uniform_cost(start):
     path = []
     uc_stack.append(start_node)
     current = uc_stack.pop(0)
+    expanded_nodes = 0
+    
     while(objectiveTest(current.state) != True):
         temp = expand_node(current)
+        expanded_nodes += 1
+        
         for item in temp:
             if item.state not in visited:
                 item.depth += current.depth
@@ -39,8 +43,10 @@ def uniform_cost(start):
     else:
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
+    
     return path
-#    return path, str(round(timeElapsed, 6))
+#    return str(round(timeElapsed, 6))
+#    return expanded_nodes
 
 # =============================================================================
 # print(uniform_cost([
