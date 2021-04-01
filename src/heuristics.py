@@ -6,7 +6,7 @@ import math
 
 # 1º heuristic - move to position with more rows/columns of final destinations
 
-def heuristic(board):
+def heuristic1(board):
     points = 0
     initialPieces = getPiecePositions(board)
     finalPieces = getFinalPiecePositions(board)

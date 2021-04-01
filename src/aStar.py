@@ -30,7 +30,7 @@ def aStar(start, depth = 100):
 
         for x in expanded:
             # calculates heuristic = number of rows/columns inline with final destinations plus depth
-            x.heuristic = heuristic3(x.state) + x.depth
+            x.heuristic = heuristic1(x.state) + x.depth
 
             if any(y.state == x.state for y in seen) == False:
                 # Adds to stack if hasn't already been seen

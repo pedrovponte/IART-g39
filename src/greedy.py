@@ -16,7 +16,7 @@ def greedy(board):
     greedy_stack.append(root)
 
     current = greedy_stack.pop(0)
-    current.heuristic = heuristic(board)
+    current.heuristic = heuristic1(board)
 
     seen = []
     seen.append(current.state)   
