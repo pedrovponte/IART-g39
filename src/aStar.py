@@ -1,5 +1,3 @@
-## More or less Working
-
 from states import *
 import time
 from pythonds.basic.stack import Stack
@@ -8,6 +6,8 @@ import math
 from heuristics import *
 
 def aStar(start, depth = 100):
+    # Performs an astar algorithm search from the start state to the goal
+    
     # Start Timer
     startTime = time.time()
     print("A* start")
@@ -16,17 +16,16 @@ def aStar(start, depth = 100):
     root = Node(start, None, None, 0, 0)
     stack = [root]
     
+    # Current node
     current=stack.pop(0)
 
-    # Records all nodes already seen
+    # Records all nodes already seen to avoid cicles
     seen = []
     seen.append(current)
-    expanded_nodes = 0
 
     while objectiveTest(current.state) == False:
         # Gets all expanded nodes from current node
         expanded = expand_node(current)
-        expanded_nodes += 1
 
         for x in expanded:
             # calculates heuristic = number of rows/columns inline with final destinations plus depth
@@ -51,20 +50,17 @@ def aStar(start, depth = 100):
         path.insert(0, current.operator)
         current = current.parent
 
-    endTime = time.time()
-
     # Calculates and prints the time
+    endTime = time.time()
     timeElapsed = endTime - startTime
 
+    # Prints time in a friendly way
     if timeElapsed>1:
         print("Time: " + str(round(timeElapsed, 3)) + "s")
     else:
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
-
     return path
-#    return str(round(timeElapsed,6))
-#    return expanded_nodes
 
 print(aStar(level1))
 

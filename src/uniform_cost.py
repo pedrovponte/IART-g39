@@ -5,39 +5,54 @@ from levels import *
 
 
 def uniform_cost(start):
+    #Performs an uniform cost search from the start state to the goal
+
+    # Start Timer
+    startTime = time.time()
     print("Uniform cost start")
 
-    startTime = time.time()
-
-    start_node = Node(start, None, None, 0, 0)
-    uc_stack = []
+    # Vector with boards already seen, so there is no cicles
     visited = []
-    path = []
+
+    # Initial node
+    start_node = Node(start, None, None, 0, 0)
+
+    # A list (in form of a stack) for the nodes.
+    uc_stack = []
     uc_stack.append(start_node)
+
+    # Current node
     current = uc_stack.pop(0)
-    expanded_nodes = 0
+
+    # Final path to be returned
+    path = []
+
+    visited.append(current.state)
     
     while(objectiveTest(current.state) != True):
+        # Gets all the possible expandable nodes
         temp = expand_node(current)
-        expanded_nodes += 1
         
         for item in temp:
             if item.state not in visited:
                 item.depth += current.depth
                 uc_stack.append(item)
+
+        # Sorts stack by depthh value and updates current node
         uc_stack.sort(key = lambda x: x.depth)
         current = uc_stack.pop(0)
         visited.append(current.state)
         
+    # Records the path to be returned
     while(current.parent != None):
         path.insert(0,current.operator)
         current=current.parent
 
-
+    # Calculates time of the function
     endTime = time.time()
-
     timeElapsed = endTime - startTime
 
+    # Prints time in a friendly way
     if timeElapsed > 1:
         print("Time: " + str(round(timeElapsed, 3)) + "s")
     else:
@@ -45,10 +60,8 @@ def uniform_cost(start):
 
     
     return path
-#    return str(round(timeElapsed, 6))
-#    return expanded_nodes
 
-# =============================================================================
+# ===========================Test purposes=====================================
 # print(uniform_cost([
 #     ['X','-','-','IY'],
 #     ['IB','-','-','-'],
