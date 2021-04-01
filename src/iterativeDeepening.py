@@ -26,6 +26,7 @@ def iterativeDeepening(start, maxDepth=17):
     path = []
 
     seen.append(current.state)
+    expanded_nodes = 0
 
     # Performs a seach for a soluction within the given depth
     for i in range(maxDepth + 1):
@@ -33,6 +34,7 @@ def iterativeDeepening(start, maxDepth=17):
         while objectiveTest(current.state) == False:
             # Gets all the possible expandable nodes
             temp = expand_node(current)
+            expanded_nodes += 1
             
             # Adds to stack all nodes within the current depth limit
             for item in temp:
@@ -72,6 +74,8 @@ def iterativeDeepening(start, maxDepth=17):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
+#    return str(round(timeElapsed,6))
+#    return expanded_nodes
 
 
 # ===========================Test purposes=====================================

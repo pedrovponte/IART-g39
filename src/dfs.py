@@ -26,11 +26,12 @@ def dfs(start, depth=14):
     path = []
 
     seen.append(current.state)
+    expanded_nodes = 0
 
     while(objectiveTest(current.state) != True):
         # Gets all the possible expandable nodes
         temp = expand_node(current)
-
+        expanded_nodes += 1
         for item in temp:
             # Check for cicles and repeated states
             if (item.state not in seen):
@@ -68,6 +69,8 @@ def dfs(start, depth=14):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
+#    return str(round(timeElapsed,6))
+#    return expanded_nodes
 
 
 # ===========================Test purposes=====================================

@@ -69,35 +69,70 @@ def tests():
 #     path_data.to_excel(file_name)
 # =============================================================================
     
+# =============================================================================
+#     i = 0
+#     dicExpanded = {}
+#     for level in levels:
+#         i += 1
+#         print(i)
+#         dicLevel = {}
+#         expandedBFS = bfs(level)
+#         expandedDFS = dfs(level)
+#         expandedUC = uniform_cost(level)
+#         expandedID = iterativeDeepening(level)
+#         expandedG = greedy(level)
+#         expandedA = aStar(level)
+#         
+#         dicLevel['BFS'] = expandedBFS
+#         dicLevel['DFS'] = expandedDFS
+#         dicLevel['Uniform Cost'] = expandedUC
+#         dicLevel['Iterative Deepening'] = expandedID
+#         dicLevel['Greedy'] = expandedG
+#         dicLevel['A*'] = expandedA
+#          
+#         dicExpanded['Level ' + str(i)] = dicLevel
+#          
+#     print(dicExpanded)
+#     path_data = pd.DataFrame(dicExpanded)
+#     file_name = '../docs/export_python_expanded.xlsx'
+#     path_data.to_excel(file_name)
+# =============================================================================
+    
+# =============================================================================
+#     i = 0
+#     dicHeuristics = {}
+#     for level in levels:
+#         i += 1
+#         print(i)
+#         dicLevel = {}
+#         timeH = aStar(level)
+#         
+#         dicLevel['heuristic3 + depth'] = timeH
+#         
+#         dicHeuristics['Level ' + str(i)] = dicLevel
+#     
+#     print(dicHeuristics)
+#     path_data = pd.DataFrame(dicHeuristics)
+#     file_name = '../docs/export_python_heuristics.xlsx'
+#     path_data.to_excel(file_name)
+# =============================================================================
+    
     i = 0
-    dicExpanded = {}
+    dicHeuristics = {}
     for level in levels:
         i += 1
         print(i)
         dicLevel = {}
-        expandedBFS = bfs(level)
-        expandedDFS = dfs(level)
-        expandedUC = uniform_cost(level)
-        expandedID = iterativeDeepening(level)
-        expandedG = greedy(level)
-        expandedA = aStar(level)
+        timeH = greedy(level)
         
-        dicLevel['BFS'] = expandedBFS
-        dicLevel['DFS'] = expandedDFS
-        dicLevel['Uniform Cost'] = expandedUC
-        dicLevel['Iterative Deepening'] = expandedID
-        dicLevel['Greedy'] = expandedG
-        dicLevel['A*'] = expandedA
-         
-        dicExpanded['Level ' + str(i)] = dicLevel
-         
-    print(dicExpanded)
-    path_data = pd.DataFrame(dicExpanded)
-    file_name = '../docs/export_python_expanded.xlsx'
+        dicLevel['heuristic1'] = timeH
+        
+        dicHeuristics['Level ' + str(i)] = dicLevel
+    
+    print(dicHeuristics)
+    path_data = pd.DataFrame(dicHeuristics)
+    file_name = '../docs/export_python_heuristics.xlsx'
     path_data.to_excel(file_name)
-    
-    
-        
         
     
 tests()

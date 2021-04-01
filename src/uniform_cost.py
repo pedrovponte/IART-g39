@@ -28,10 +28,12 @@ def uniform_cost(start):
     path = []
 
     visited.append(current.state)
+    expanded_nodes = 0
     
     while(objectiveTest(current.state) != True):
         # Gets all the possible expandable nodes
         temp = expand_node(current)
+        expanded_nodes += 1
         
         for item in temp:
             if item.state not in visited:
@@ -60,6 +62,8 @@ def uniform_cost(start):
 
     
     return path
+#    return str(round(timeElapsed, 6))
+#    return expanded_nodes
 
 # ===========================Test purposes=====================================
 # print(uniform_cost([
