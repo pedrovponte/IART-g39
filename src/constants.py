@@ -3,7 +3,7 @@ from utils import *
 
 
 # images
-"""
+
 
 X_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/wall.png')
 W_TILE = pygame.image.load('C:/Users/Mariana Ramos/Desktop/3ano/iart/IART-g39/src/Tiles/white_tile.png')
@@ -108,7 +108,7 @@ IYFG_TILE = pygame.image.load('Tiles/yellow_greenc_tile.png')
 IYFO_TILE = pygame.image.load('Tiles/yellow_orangec_tile.png')
 IYFP_TILE = pygame.image.load('Tiles/yellow_purplec_tile.png')
 IYFR_TILE = pygame.image.load('Tiles/yellow_redc_tile.png')
-
+"""
 
 
 # colors dictionary
