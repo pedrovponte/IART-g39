@@ -39,7 +39,7 @@ def greedy(board):
         
         for item in temp:
             # calculates heuristic for each node in the stack
-            item.heuristic = heuristic1(board) + item.depth
+            item.heuristic = heuristic1(item.state)
             # Check for cicles and repeated states
             if (item.state not in seen):
                 greedy_stack.append(item)
@@ -76,6 +76,6 @@ def greedy(board):
 
 # ===========================Test purposes=====================================
 # 
-print(greedy(level10))
+# print(greedy(level1))
 # =============================================================================
 

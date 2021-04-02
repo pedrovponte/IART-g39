@@ -4,7 +4,6 @@ from piece import *
 
 class Board:
     def __init__(self, input_board, square_size):
-        # self.algorithm = utils.chooseAlg()
         self.square_size = square_size
         self.board = [] 
         self.input_board = input_board

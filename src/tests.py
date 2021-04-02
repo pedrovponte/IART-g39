@@ -117,23 +117,98 @@ def tests():
 #     path_data.to_excel(file_name)
 # =============================================================================
     
+# =============================================================================
+#     i = 0
+#     dicHeuristics = {}
+#     for level in levels:
+#         i += 1
+#         print(i)
+#         dicLevel = {}
+#         timeH = greedy(level)
+#         
+#         dicLevel['heuristic3'] = timeH
+#         
+#         dicHeuristics['Level ' + str(i)] = dicLevel
+#     
+#     print(dicHeuristics)
+#     path_data = pd.DataFrame(dicHeuristics)
+#     file_name = '../docs/export_python_heuristics.xlsx'
+#     path_data.to_excel(file_name)
+# =============================================================================
+        
+# =============================================================================
+#     i = 0
+#     dicExpanded = {}
+#     for level in levels:
+#         i += 1
+#         print(i)
+#         dicLevel = {}
+#         expandedAHeuristic = aStar(level)
+#         
+#         dicLevel['heuristic3 + depth'] = expandedAHeuristic
+#         
+#         dicExpanded['Level ' + str(i)] = dicLevel
+#           
+#     print(dicExpanded)
+#     path_data = pd.DataFrame(dicExpanded)
+#     file_name = '../docs/export_python_heuristics.xlsx'
+#     path_data.to_excel(file_name)
+# =============================================================================
+    
+# =============================================================================
+#     i = 0
+#     dicExpanded = {}
+#     for level in levels:
+#         i += 1
+#         print(i)
+#         dicLevel = {}
+#         expandedGreedyHeuristic = greedy(level)
+#         
+#         dicLevel['heuristic3'] = expandedGreedyHeuristic
+#         
+#         dicExpanded['Level ' + str(i)] = dicLevel
+#           
+#     print(dicExpanded)
+#     path_data = pd.DataFrame(dicExpanded)
+#     file_name = '../docs/export_python_heuristics.xlsx'
+#     path_data.to_excel(file_name)
+# =============================================================================
+    
+# =============================================================================
+#     i = 0
+#     dicPath = {}
+#     for level in levels:
+#         i += 1
+#         print(i)
+#         dicLevel = {}
+#         pathA = len(aStar(level))
+#         
+#         dicLevel['heuristic3 + depth'] = pathA
+#         
+#         dicPath['Level ' + str(i)] = dicLevel
+#          
+#     print(dicPath)
+#     path_data = pd.DataFrame(dicPath)
+#     file_name = '../docs/export_python_heuristics.xlsx'
+#     path_data.to_excel(file_name)
+# =============================================================================
+    
     i = 0
-    dicHeuristics = {}
+    dicPath = {}
     for level in levels:
         i += 1
         print(i)
         dicLevel = {}
-        timeH = greedy(level)
+        pathGreedy = len(greedy(level))
         
-        dicLevel['heuristic1'] = timeH
+        dicLevel['heuristic3'] = pathGreedy
         
-        dicHeuristics['Level ' + str(i)] = dicLevel
-    
-    print(dicHeuristics)
-    path_data = pd.DataFrame(dicHeuristics)
+        dicPath['Level ' + str(i)] = dicLevel
+         
+    print(dicPath)
+    path_data = pd.DataFrame(dicPath)
     file_name = '../docs/export_python_heuristics.xlsx'
     path_data.to_excel(file_name)
-        
     
 tests()
         

@@ -66,7 +66,7 @@ def aStar(start, depth = 100):
 #    return str(round(timeElapsed,6))
 #    return expanded_nodes
 
-print(aStar(level20))
+# print(aStar(level20))
 
     
     
