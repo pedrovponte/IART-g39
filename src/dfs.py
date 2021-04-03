@@ -37,7 +37,7 @@ def dfs(start, depth=14):
             if (item.state not in seen):
                 # Inserts node to seen list so it is not again
                 seen.append(item.state)
-                dfs_stack.insert(0,item)
+                dfs_stack.insert(0, item)
             else:
                 continue
         
@@ -57,7 +57,7 @@ def dfs(start, depth=14):
 
     # Records the path to be returned
     while(current.parent != None):
-        path.insert(0,current.operator)
+        path.insert(0, current.operator)
         current = current.parent
 
     # Calculates time of the function

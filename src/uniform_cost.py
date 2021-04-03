@@ -50,7 +50,7 @@ def uniform_cost(start):
         
     # Records the path to be returned
     while(current.parent != None):
-        path.insert(0,current.operator)
+        path.insert(0, current.operator)
         current=current.parent
 
     # Calculates time of the function

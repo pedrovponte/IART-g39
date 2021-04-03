@@ -9,7 +9,7 @@
 pip install pygame
 ```
 
-* Para correr o programa, basta fazer Run se for corrido num IDE ou então utilizando a linha de comandos, utilizando o comando:
+* Para correr o programa, basta fazer Run do ficheiro `main.py` se for corrido num IDE ou então utilizando a linha de comandos, com o comando:
 
 ```
 #Windows: python main.py
@@ -21,7 +21,7 @@ pip install pygame
 
 Quando o jogo já estiver a ser executado, são apresentadas duas opções: "Player Mode" e "Computer Mode".
 
-Escolhendo o "Player Mode", é possível selecionar um dos 20 níveis existentes. A cada nível o jogador deve utilizar as setas para mover as peças sincronamente e colocá-las nas posições corretas com o menor número de movimentos possível.
+Escolhendo o "Player Mode", é possível selecionar um dos 20 níveis existentes. Os níveis estão ordenados por ordem crescente do número de movimentos otimo para os resolver. A cada nível o jogador deve utilizar as setas para mover as peças sincronamente e colocá-las nas posições corretas com o menor número de movimentos possível.
 
 No modo computador, é possível escolher um dos 6 algoritmos implementados e um dos 20 níveis e observar a solução do computador carregando na tecla "Enter" a cada jogada.
 
@@ -33,6 +33,6 @@ Do lado direito do tabuleiro, apresentam-se 3 opções:
 
  * Hint, para obter uma ajuda para o próximo movimento a executar. Caso ainda seja possível resolver o tabuleiro, entao o computador executa a melhor jogada possível. Caso contrário, o nível é reiniciado;
  * Reset, para reiniciar o nível;
- * Quit, para sair do jogo. 
+ * Quit, para sair do nível e regressar ao menu inicial.
 
 

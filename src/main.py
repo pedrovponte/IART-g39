@@ -328,7 +328,7 @@ def main():
                     elif HINT_RECT.collidepoint(event.pos):
                         path = []
                         path = aStar(level)
-                        if path == None:
+                        if path == "No Solution":
                             level = initial_level
                             board = Board(level, square_size)
                             allMoves = []

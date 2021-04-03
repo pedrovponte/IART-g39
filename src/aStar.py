@@ -43,8 +43,7 @@ def aStar(start, depth = 100):
                     stack.append(x)
                     
         if len(stack) == 0:
-            print("NONE")
-            return None
+            return "No Solution"
 
         # Sorts stack by heuristic value and updates current node
         stack.sort(key = lambda x: x.heuristic)

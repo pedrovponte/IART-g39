@@ -11,7 +11,6 @@ class Board:
         
 
     def draw(self, window):
-        #window.fill(BLUE)
         bg = pygame.image.load("Tiles/background.jpg")
         window.blit(bg, (0, 0))
         

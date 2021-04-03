@@ -23,22 +23,13 @@ def objectiveTest(board):
     for row in board:
         for cel in row:
             # If there is any cell starting with "F" it means there is one final cell empty
-            if(cel[0]=='F'):
+            if(cel[0] == 'F'):
                 return False
             # If the lenght of the cell is higher than 2 it means a cell is on top of a final cell
-            if len(cel)>2:
-                if cel[1]!=cel[3]:
+            if len(cel) > 2:
+                if cel[1] != cel[3]:
                     return False
     return True
-
-# ===========================Test purposes=====================================
-# print(objectiveTest([
-# 		['X','-','-','-'],
-# 		['-','-','-','-'],
-# 		['X','IOFO','-','-'],
-# 		['X','ICFC','-','-']
-# 		]))
-# =============================================================================
 
 
 # conditions so it can move to given direction (must have empty or final state in the op direction of at least one cell)
@@ -50,172 +41,154 @@ def precond(oldboard, op):
     for row in range(len(board)):
         for col in range(len(board)):
             # means it is movable piece
-            if board[row][col][0]=="I":
-                if op=="up":
-                    if row!=0 and board[row-1][col]!="X" and board[row-1][col][0]!="I":
+            if board[row][col][0] == "I":
+                if op == "up":
+                    if row != 0 and board[row-1][col] != "X" and board[row-1][col][0] != "I":
                         return True
-                if op=="down":
-                    if row!=len(board)-1 and board[row+1][col]!="X" and board[row+1][col][0]!="I":
+                if op == "down":
+                    if row != len(board)-1 and board[row+1][col] != "X" and board[row+1][col][0] != "I":
                         return True
-                if op=="left":
-                    if col!=0 and board[row][col-1]!="X" and board[row][col-1][0]!="I":
+                if op == "left":
+                    if col != 0 and board[row][col-1] != "X" and board[row][col-1][0] != "I":
                         return True
-                if op=="right":
-                    if col!=len(board)-1 and board[row][col+1]!="X" and board[row][col+1][0]!="I":
+                if op == "right":
+                    if col != len(board)-1 and board[row][col+1] != "X" and board[row][col+1][0] != "I":
                         return True
     return False
 
 
-# ===========================Test purposes=====================================
-# print(precond([
-# 		['X','-','-','-'],
-# 		['-','I','-','I'],
-# 		['X','F','-','-'],
-# 		['X','F','-','-']
-# 		], "right"))
-# =============================================================================
-
 # Movement effects if preconditions are satisfied
-def effects(oldboard,op):
+def effects(oldboard, op):
 
     # Copies the passed argument so it can be modified and studied
     board = [x[:] for x in oldboard]
 
     # Verifies if the preconditions are satisfied
-    if precond(board,op)==False:
+    if precond(board, op)==False:
         return None
     
     # Auxiliar board
-    newboard=[]
-    if(op=="up"):
+    newboard = []
+    if(op == "up"):
         # Since each movement makes the pieces go until there is no more room to move, then if the previous board is the same as the current it means no more movements can be made in this direction
-        while(newboard!=board):
+        while(newboard != board):
             newboard = [x[:] for x in board]
-            for row in range(len(board)-1,0,-1):
+            for row in range(len(board)-1, 0, -1):
                 for col in range(len(board)):
-                    if board[row][col][0]=="I":
+                    if board[row][col][0] == "I":
                         # Top piece is not final
-                        if board[row-1][col]=="-":
+                        if board[row-1][col] == "-":
                             # Current piece is on top of another final piece
-                            if len(board[row][col])>2:
-                                board[row-1][col]=board[row][col][:2]
-                                board[row][col]=board[row][col][2:]
+                            if len(board[row][col]) > 2:
+                                board[row-1][col] = board[row][col][:2]
+                                board[row][col] = board[row][col][2:]
 
                             # Current piece is not on top of another final piece
                             else:
-                                board[row-1][col]=board[row][col]
-                                board[row][col]="-"
+                                board[row-1][col] = board[row][col]
+                                board[row][col] = "-"
 
                         # Top piece is final
-                        if board[row-1][col][0]=="F":
+                        if board[row-1][col][0] == "F":
                             # Current piece is on top of another final piece
-                            if len(board[row][col])>2:
-                                board[row-1][col]=board[row][col][:2]+board[row-1][col]
-                                board[row][col]=board[row][col][2:]
+                            if len(board[row][col]) > 2:
+                                board[row-1][col] = board[row][col][:2] + board[row-1][col]
+                                board[row][col] = board[row][col][2:]
 
                             # Current piece is not on top of another final piece
                             else:
-                                board[row-1][col]=board[row][col]+board[row-1][col]
-                                board[row][col]="-"             
+                                board[row-1][col] = board[row][col] + board[row-1][col]
+                                board[row][col] = "-"             
         return board
-    elif(op=="down"):
-        while(newboard!=board):
+    elif(op == "down"):
+        while(newboard != board):
             newboard = [x[:] for x in board]
             for row in range(len(board)-1):
                 for col in range(len(board)):
-                    if board[row][col][0]=="I":
+                    if board[row][col][0] == "I":
                         # Bottom is not final
-                        if board[row+1][col]=="-":
+                        if board[row+1][col] == "-":
                             # Current piece is on top of another final piece
-                            if len(board[row][col])>2:
-                                board[row+1][col]=board[row][col][:2]
-                                board[row][col]=board[row][col][2:]
+                            if len(board[row][col]) > 2:
+                                board[row+1][col] = board[row][col][:2]
+                                board[row][col] = board[row][col][2:]
 
                             # Current piece is not on top of another final piece
                             else:
-                                board[row+1][col]=board[row][col]
-                                board[row][col]="-"
+                                board[row+1][col] = board[row][col]
+                                board[row][col] = "-"
 
                         # Bottom is final
-                        if board[row+1][col][0]=="F":
+                        if board[row+1][col][0] == "F":
                             # Current piece is on top of another final piece
-                            if len(board[row][col])>2:
-                                board[row+1][col]=board[row][col][:2]+board[row+1][col]
-                                board[row][col]=board[row][col][2:]
+                            if len(board[row][col]) > 2:
+                                board[row+1][col] = board[row][col][:2]+board[row+1][col]
+                                board[row][col] = board[row][col][2:]
 
                             # Current piece is not on top of another final piece
                             else:
-                                board[row+1][col]=board[row][col]+board[row+1][col]
-                                board[row][col]="-"
+                                board[row+1][col] = board[row][col]+board[row+1][col]
+                                board[row][col] = "-"
         return board
-    elif(op=="right"):
-        while(newboard!=board):
+    elif(op == "right"):
+        while(newboard != board):
             newboard = [x[:] for x in board]
             for col in range(len(board)-1):
                 for row in range(len(board)):
-                    if board[row][col][0]=="I":
+                    if board[row][col][0] == "I":
                         # Current piece is on top of another final piece
-                        if board[row][col+1]=="-":
+                        if board[row][col+1] == "-":
                             # Current piece is on top of another final piece
-                            if len(board[row][col])>2:
-                                board[row][col+1]=board[row][col][:2]
-                                board[row][col]=board[row][col][2:]
+                            if len(board[row][col]) > 2:
+                                board[row][col+1] = board[row][col][:2]
+                                board[row][col] = board[row][col][2:]
 
                             # Current piece is not on top of another final piece
                             else:
-                                board[row][col+1]=board[row][col]
-                                board[row][col]="-"
+                                board[row][col+1] = board[row][col]
+                                board[row][col] = "-"
                         # Current piece is on top of another final piece
-                        if board[row][col+1][0]=="F":
+                        if board[row][col+1][0] == "F":
                             # Current piece is on top of another final piece
-                            if len(board[row][col])>2:
-                                board[row][col+1]=board[row][col][:2]+board[row][col+1]
-                                board[row][col]=board[row][col][2:]
+                            if len(board[row][col]) > 2:
+                                board[row][col+1] = board[row][col][:2] + board[row][col+1]
+                                board[row][col] = board[row][col][2:]
 
                             # Current piece is not on top of another final piece
                             else:
-                                board[row][col+1]=board[row][col]+board[row][col+1]
-                                board[row][col]="-"
+                                board[row][col+1] = board[row][col] + board[row][col+1]
+                                board[row][col] = "-"
         return board
-    elif(op=="left"):
-        while(newboard!=board):
+    elif(op == "left"):
+        while(newboard != board):
             newboard = [x[:] for x in board]
-            for col in range(len(board)-1,0,-1):
+            for col in range(len(board) - 1,0,-1):
                 for row in range(len(board)):
-                    if board[row][col][0]=="I":
+                    if board[row][col][0] == "I":
                         # Current piece is on top of another final piece
-                        if board[row][col-1]=="-":
+                        if board[row][col-1] == "-":
                             # Current piece is on top of another final piece
-                            if len(board[row][col])>2:
-                                board[row][col-1]=board[row][col][:2]
-                                board[row][col]=board[row][col][2:]
+                            if len(board[row][col]) > 2:
+                                board[row][col-1] = board[row][col][:2]
+                                board[row][col] = board[row][col][2:]
 
                             # Current piece is not on top of another final piece
                             else:
-                                board[row][col-1]=board[row][col]
-                                board[row][col]="-"
+                                board[row][col-1] = board[row][col]
+                                board[row][col] = "-"
                         # Current piece is on top of another final piece
-                        if board[row][col-1][0]=="F":
+                        if board[row][col-1][0] == "F":
                             # Current piece is on top of another final piece
-                            if len(board[row][col])>2:
-                                board[row][col-1]=board[row][col][:2]+board[row][col-1]
-                                board[row][col]=board[row][col][2:]
+                            if len(board[row][col]) > 2:
+                                board[row][col-1] = board[row][col][:2] + board[row][col-1]
+                                board[row][col] = board[row][col][2:]
 
                             # Current piece is not on top of another final piece
                             else:
-                                board[row][col-1]=board[row][col]+board[row][col-1]
-                                board[row][col]="-"
+                                board[row][col-1] = board[row][col] + board[row][col-1]
+                                board[row][col] = "-"
         return board
 
-
-# ===========================Test purposes=====================================
-# node1 = [['X','-','-','-'],
-# 		['IB','-','I2','IY'],
-# 		['X','FB','-','IJ'],
-# 		['X','FY','-','-']
-# 		]
-# print(effects(node1,"left"))
-# =============================================================================
 
 # Expands a node and gets all possible nodes it can reach 
 def expand_node(node):
