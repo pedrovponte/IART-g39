@@ -62,18 +62,7 @@ def uniform_cost(start):
 
     
     return path
-#    return str(round(timeElapsed, 6))
-#    return expanded_nodes
 
-# ===========================Test purposes=====================================
-# print(uniform_cost([
-#     ['X','-','-','IY'],
-#     ['IB','-','-','-'],
-#     ['X','FB','-','-'],
-#     ['X','FY','-','-']
-#     ]))
-#    
-# print(uniform_cost(level20))
-# =============================================================================
+    
 
 

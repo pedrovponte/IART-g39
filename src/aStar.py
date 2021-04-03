@@ -41,6 +41,10 @@ def aStar(start, depth = 100):
                 if x.state == seen[i].state and x.depth < seen[i].depth:
                     seen[i] = x
                     stack.append(x)
+                    
+        if len(stack) == 0:
+            print("NONE")
+            return None
 
         # Sorts stack by heuristic value and updates current node
         stack.sort(key = lambda x: x.heuristic)
@@ -63,10 +67,7 @@ def aStar(start, depth = 100):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
-#    return str(round(timeElapsed,6))
-#    return expanded_nodes
 
-# print(aStar(level20))
 
     
     

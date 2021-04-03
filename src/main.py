@@ -309,6 +309,7 @@ def main():
                         level = initial_level
                         board = Board(level, square_size)
                         allMoves = []
+                        moves = 0
                         path = None
                     elif QUIT_RECT.collidepoint(event.pos):
                         terminate()
@@ -317,7 +318,14 @@ def main():
                     elif HINT_RECT.collidepoint(event.pos):
                         path = []
                         path = aStar(level)
-                        move = path[0]
+                        if path == None:
+                            level = initial_level
+                            board = Board(level, square_size)
+                            allMoves = []
+                            moves = 0
+                            path = None
+                        else:
+                            move = path[0]
             
             
             if move:

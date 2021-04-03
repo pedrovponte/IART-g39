@@ -69,13 +69,6 @@ def greedy(board):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
-#    return str(round(timeElapsed,6))
-#    return expanded_nodes
 
-
-
-# ===========================Test purposes=====================================
-# 
-# print(greedy(level1))
-# =============================================================================
+    
 

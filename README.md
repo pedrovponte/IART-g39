@@ -2,17 +2,37 @@
 
 ## Executar o programa
 
-Na implementação do nosso projeto utilizamos a linguagem de programação python recorrendo ao módulo *pygame* para representação da interface do jogo. Para instalar este módulo é necessário ir à pasta python/scripts, abrir uma linha de comandos para este diretório e dirigir o comando:
-```C:\python34\scripts> python -m pip install pygame```
+* Instalar o [Python3](https://www.python.org/);
+* Instalar o módulo [pygame](https://www.pygame.org/);
 
-De seguida basta fazer o download do zip, extrai-lo e abrir o terminal dentro do seu diretório. Depois pode-se correr os comandos "python3 main.py" em Ubuntu ou "py main.py" em Windows.
+```
+pip install pygame
+```
+
+* Para correr o programa, basta fazer Run se for corrido num IDE ou então utilizando a linha de comandos, utilizando o comando:
+
+```
+#Windows: python main.py
+
+#Linux: python3 main.py
+```
 
 ## Como jogar
 
-Quando o jogo tiver sido executado serão apresentadas duas opções: "Computer Mode" ou "Player Mode".
+Quando o jogo já estiver a ser executado, são apresentadas duas opções: "Player Mode" e "Computer Mode".
 
-No modo computador é possível escolher um dos 6 algoritmos implementados e um dos 20 níveis e observar a solução do computador carregando na tecla "Enter" a cada jogada.
+Escolhendo o "Player Mode", é possível selecionar um dos 20 níveis existentes. A cada nível o jogador deve utilizar as setas para mover as peças sincronamente e colocá-las nas posições corretas com o menor número de movimentos possível.
 
-No modo para jogar também é possível selecionar um dos 20 níveis. A cada nível o jogador deve utilizar as setas para mover as peças sincronamente e colocá-las nas posições corretas com o menor número de movimentos possível. 
+No modo computador, é possível escolher um dos 6 algoritmos implementados e um dos 20 níveis e observar a solução do computador carregando na tecla "Enter" a cada jogada.
 
-No canto superior direito do tabuleiro é possível observar o número de jogadas efetuadas e o número de jogadas ótimas para resolver o puzzle. Adicionalmente o jogador pode usar o botão "Hint" para obter uma ajuda do computador que lhe indicará o próximo movimento.
+Quando se completa o nível, a aplicação espera 2 segundos antes de fechar o jogo.
+
+No canto superior direito do tabuleiro é possível observar o número de jogadas efetuadas e o número de jogadas ótimas para resolver o puzzle.
+
+Do lado direito do tabuleiro, apresentam-se 3 opções:
+
+ * Hint, para obter uma ajuda para o próximo movimento a executar. Caso ainda seja possível resolver o tabuleiro, entao o computador executa a melhor jogada possível. Caso contrário, o nível é reiniciado;
+ * Reset, para reiniciar o nível;
+ * Quit, para sair do jogo. 
+
+
