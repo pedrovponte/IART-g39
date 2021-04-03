@@ -74,38 +74,6 @@ def iterativeDeepening(start, maxDepth=17):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
-#    return str(round(timeElapsed,6))
-#    return expanded_nodes
-
-
-# ===========================Test purposes=====================================
-# print(iterativeDeepening([
-# 		['X','-','-','IY'],
-# 		['IB','-','-','-'],
-# 		['X','FB','-','-'],
-# 		['X','FY','-','-']
-# 		]))
-# 
-# test2 = [
-# 		['-','-','-','FR'],
-# 		['IR','-','X','-'],
-# 		['X','IG','-','-'],
-# 		['-','-','-','FG']
-# 		]
-# print(iterativeDeepening(test2))
-# 
-# test3 = [
-# 		['-','-','-','-','FB'],
-# 		['-','-','IB','-','X'],
-# 		['-','-','-','X','-'],
-# 		['-','IB','X','-','FB'],
-#       ['X', '-', '-', '-','-']
-# 		]
-#  
-# print(iterativeDeepening(test3))
-# 
-# print(iterativeDeepening(level10))
-# =============================================================================
 
 
 

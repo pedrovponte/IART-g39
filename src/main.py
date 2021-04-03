@@ -30,12 +30,14 @@ def main():
     width, height = 840, 640
     square_width, square_height = 500, 500
     
-    
     while display_menu:
-        WINDOW.fill(BLUE)
+        bg = pygame.image.load("Tiles/background.jpg")
+        WINDOW.blit(bg, (0, 0))
+        #WINDOW.fill(BLUE)
         WINDOW.blit(GAMENAME_SURF, GAMENAME_RECT)
         WINDOW.blit(PLAYER_SURF, PLAYER_RECT)
         WINDOW.blit(COMPUTER_SURF, COMPUTER_RECT)
+        WINDOW.blit(EXIT_SURF, EXIT_RECT)
     
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP:
@@ -46,14 +48,21 @@ def main():
                     break
                 elif COMPUTER_RECT.collidepoint(event.pos):
                     display_menu = False
-                    break
+                elif EXIT_RECT.collidepoint(event.pos):
+                    display_menu = False
+                    run = False
+                    display_mode = False
+                    display_level = False
+                    exit_game()
+                    return
                 
         if(display_menu != False):
             pygame.display.update()
             
     
     while display_mode:
-        WINDOW.fill(BLUE)
+        WINDOW.blit(bg, (0, 0))
+        #WINDOW.fill(BLUE)
         WINDOW.blit(CHOOSEMODE_SURF, CHOOSEMODE_RECT)
         WINDOW.blit(BFS_SURF, BFS_RECT)
         WINDOW.blit(DFS_SURF, DFS_RECT)
@@ -94,7 +103,8 @@ def main():
     
             
     while display_level:
-        WINDOW.fill(BLUE)
+        WINDOW.blit(bg, (0, 0))
+        #WINDOW.fill(BLUE)
         WINDOW.blit(CHOOSELEVEL_SURF, CHOOSELEVEL_RECT)
         WINDOW.blit(LEVEL1_SURF, LEVEL1_RECT)
         WINDOW.blit(LEVEL2_SURF, LEVEL2_RECT)
@@ -360,8 +370,10 @@ def main():
         
     
 def terminate():    
-    pygame.quit()
+    main()
     
+def exit_game():    
+    pygame.quit()
 
 if __name__=="__main__":
     main()

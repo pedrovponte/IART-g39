@@ -32,18 +32,21 @@ def bfs(start):
         # Gets all the possible expandable nodes
         temp = expand_node(current)
         expanded_nodes += 1
+
         for item in temp:
             # Check for cicles and repeated states
             if (item.state not in seen):
+                # Inserts node to seen list so it is not seen again
+                seen.append(item.state)
                 bfs_stack.append(item)
             else:
                 continue
 
         # Updates current node
-        current = bfs_stack.pop(0)
-
-        # Inserts node to seen list so it is not again
-        seen.append(current.state)
+        if len(bfs_stack)!=0:
+            current = bfs_stack.pop(0)
+        else:
+            return "No Soluction"
     
     # Records the path to be returned
     while(current.parent != None):
@@ -61,6 +64,5 @@ def bfs(start):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
-
 
 

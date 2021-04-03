@@ -11,7 +11,9 @@ class Board:
         
 
     def draw(self, window):
-        window.fill(BLUE)
+        #window.fill(BLUE)
+        bg = pygame.image.load("Tiles/background.jpg")
+        window.blit(bg, (0, 0))
         
         for row in range(len(self.input_board)):
             for col in range(len(self.input_board)):

@@ -35,15 +35,17 @@ def dfs(start, depth=14):
         for item in temp:
             # Check for cicles and repeated states
             if (item.state not in seen):
+                # Inserts node to seen list so it is not again
+                seen.append(item.state)
                 dfs_stack.insert(0,item)
             else:
                 continue
         
         # Updates current node
-        current = dfs_stack.pop()
-
-        # Inserts node to seen list so it is not again
-        seen.append(current.state)
+        if len(dfs_stack)!=0:
+            current = dfs_stack.pop()
+        else:
+            return "No Soluction"
 
         # Checks if current node has a depth higher than the maximum given, if it is advances to the next
         while (current.depth > depth):
@@ -69,5 +71,4 @@ def dfs(start, depth=14):
         print("Time: " + str(round(timeElapsed*1000, 3)) + "ms")
 
     return path
-
 

@@ -37,13 +37,16 @@ def uniform_cost(start):
         
         for item in temp:
             if item.state not in visited:
+                visited.append(item.state)
                 item.depth += current.depth
                 uc_stack.append(item)
 
         # Sorts stack by depthh value and updates current node
-        uc_stack.sort(key = lambda x: x.depth)
-        current = uc_stack.pop(0)
-        visited.append(current.state)
+        if len(uc_stack)!=0:
+            uc_stack.sort(key = lambda x: x.depth)
+            current = uc_stack.pop(0)
+        else:
+            return "No Soluction"
         
     # Records the path to be returned
     while(current.parent != None):
@@ -62,7 +65,3 @@ def uniform_cost(start):
 
     
     return path
-
-    
-
-
