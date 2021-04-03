@@ -358,8 +358,26 @@ def main():
                     if RESET_RECT.collidepoint(event.pos):
                         level = initial_level
                         board = Board(level, square_size)
+                        if(mode == 'bfs'):
+                            path = bfs(level)
+                            print("ALL MOVES: ", path)
+                        elif(mode == 'dfs'):
+                            path = dfs(level)
+                            print("ALL MOVES: ", path)
+                        elif(mode == 'uniform'):
+                            path = uniform_cost(level)
+                            print("ALL MOVES: ", path)
+                        elif(mode == 'greedy'):
+                            path = greedy(level)
+                            print("ALL MOVES: ", path)
+                        elif(mode == 'astar'):
+                            path = aStar(level)
+                            print("ALL MOVES: ", path)
+                        elif(mode == 'iterative'):
+                            path = iterativeDeepening(level)
+                            print("ALL MOVES: ", path)
                         allMoves = []
-                        path = None
+                        moves = 0
                     elif QUIT_RECT.collidepoint(event.pos):
                         terminate()
                         run = False
