@@ -1,6 +1,8 @@
 
-src/.vscode/
+proj1/src/.vscode/
 
-src/__pycache__/
+proj1/src/__pycache__/
 
 .vscode/settings.json
+
+.idea
